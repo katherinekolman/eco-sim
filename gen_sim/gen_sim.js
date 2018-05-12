@@ -18,7 +18,7 @@ function setup() {
 function draw() {
     background(150);
 
-    for (let i = 0; i < organisms.length; i++) {
+    for (let i = organisms.length - 1; i > -1; i--) {
         if (organisms[i].health > 0) {
             organisms[i].display();
             organisms[i].findFood(nutrients);
@@ -30,12 +30,12 @@ function draw() {
 
     if (organisms.length == 0) {
         for (let i = 0; i < numOrgs; i++) {
-            organisms[i] = new Organism(random(650), random(450));
+            organisms[i] = new Organism(random(900), random(650));
         }
     }
 
     while (nutrients.length < numFood) {
-        nutrients.push(new Food(random(640), random(440), random(-20, 20)));
+        nutrients.push(new Food(random(890), random(640), random(-20, 20)));
     }
 
     for (let i = 0; i < nutrients.length; i++) {
