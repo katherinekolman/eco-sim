@@ -2,9 +2,12 @@ var organisms = [];
 var nutrients = [];
 var numOrgs = 20;
 var numFood = 75;
+var genCount = 0;
+var genCounter;
 
 function setup() {
     createCanvas(900, 650);
+    genCounter = createP("Generation count: " + genCount);
 
     for (let i = 0; i < numOrgs; i++) {
         organisms[i] = new Organism(random(900), random(650));
@@ -17,6 +20,7 @@ function setup() {
 
 function draw() {
     background(150);
+    genCounter.html("Generation count: " + genCount);
 
     for (let i = organisms.length - 1; i > -1; i--) {
         if (organisms[i].health > 0) {
@@ -29,6 +33,7 @@ function draw() {
     }
 
     if (organisms.length == 0) {
+        genCount++;
         for (let i = 0; i < numOrgs; i++) {
             organisms[i] = new Organism(random(900), random(650));
         }
