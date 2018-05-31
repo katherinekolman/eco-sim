@@ -3,10 +3,11 @@ class Organism {
         this.position = createVector(x, y);
         this.velocity = createVector(0, 0);
         this.acceleration = createVector(0, 0);
-        this.maxVelocity = random(1, 2);
         this.maxForce = 0.2;
+        this.maxVelocity = random(1, 2);
         this.health = 100;
         this.size = 3;
+        this.dna = [this.size, this.health, this.maxVelocity];
     }
 
     // updates the physics and health of the agent
@@ -17,7 +18,7 @@ class Organism {
         this.acceleration.mult(0);
         this.health -= 0.05;
     }
-    
+
     // displays the location of the agent
     display() {
         let angle = this.velocity.heading() + PI / 2;
@@ -46,7 +47,7 @@ class Organism {
             }
         }
 
-        if (distance < 10) {
+        if (distance < 10) { // if it finds food
             this.health += nutrients[closest].nutrition;
 
             if (this.health > 100) {
@@ -58,12 +59,17 @@ class Organism {
         }
     }
 
-    // seeks the closest food object
+    // physics for seeking the closest food object
     seek(closest) {
         let target = p5.Vector.sub(closest.position, this.position);
         target.setMag(this.maxVelocity);
         let steer = p5.Vector.sub(target, this.velocity);
         steer.limit(this.maxForce);
         this.acceleration.add(steer);
+    }
+
+    // slightly alters dna values after death
+    mutate(dna) {
+
     }
 }

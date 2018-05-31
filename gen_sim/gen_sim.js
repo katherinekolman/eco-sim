@@ -2,14 +2,13 @@ var organisms = [];
 var nutrients = [];
 var numOrgs = 20;
 var numFood = 75;
-var genCount = 0;
-var genCounter;
 var canvasHeight = 650;
 var canvasWidth = 900;
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
-    genCounter = createP("Generation count: " + genCount);
+
+    //createEnvironment();
 
     for (let i = 0; i < numOrgs; i++) {
         organisms[i] = new Organism(random(canvasWidth), random(canvasHeight));
@@ -20,9 +19,9 @@ function setup() {
     }
 }
 
+// updates the environment
 function draw() {
     background(150);
-    genCounter.html("Generation count: " + genCount);
 
     for (let i = organisms.length - 1; i > -1; i--) {
         if (organisms[i].health > 0) {
@@ -30,16 +29,19 @@ function draw() {
             organisms[i].findFood(nutrients);
             organisms[i].update();
         } else {
+            organisms[i].
             organisms.splice(i, 1);
+            organisms.push(new Organism(organisms[i]))
         }
     }
 
-    if (organisms.length == 0) {
-        genCount++;
-        for (let i = 0; i < numOrgs; i++) {
-            organisms[i] = new Organism(random(canvasWidth), random(canvasHeight));
-        }
-    }
+    // old way of making organisms
+    // if (organisms.length == 0) {
+    //     genCount++;
+    //     for (let i = 0; i < numOrgs; i++) {
+    //         organisms[i] = new Organism(random(canvasWidth), random(canvasHeight));
+    //     }
+    // }
 
     while (nutrients.length < numFood) {
         nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(-20, 20)));
