@@ -1,5 +1,5 @@
 class Organism {
-    constructor(x, y) {
+    constructor(dna, x, y) {
         this.position = createVector(x, y);
         this.velocity = createVector(0, 0);
         this.acceleration = createVector(0, 0);
@@ -70,6 +70,19 @@ class Organism {
 
     // slightly alters dna values after death
     mutate(dna) {
-
+        for (let i = 0; i < dna.length; i++) {
+            if (random(1) > .9) {
+                switch(i) {
+                    case 0:
+                        dna[i] += random(-.3, .3);
+                        break;
+                    case 1:
+                        dna[i] += random(-3, 3);
+                        break;
+                    case 2:
+                        dna[i] += random(-.1, .1);
+                }
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ function setup() {
     //createEnvironment();
 
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism(random(canvasWidth), random(canvasHeight));
+        organisms[i] = new Organism([3, 100, random(1, 2)], random(canvasWidth), random(canvasHeight));
     }
 
     for (let i = 0; i < numFood; i++) {
@@ -29,9 +29,9 @@ function draw() {
             organisms[i].findFood(nutrients);
             organisms[i].update();
         } else {
-            organisms[i].
+            organisms[i].mutate(organisms[i].dna);
+            organisms.push(new Organism(organisms[i].dna, organisms[i].position.x, organisms[i].position.y));
             organisms.splice(i, 1);
-            organisms.push(new Organism(organisms[i]))
         }
     }
 
