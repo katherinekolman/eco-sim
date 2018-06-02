@@ -4,6 +4,7 @@ class Organism {
         this.position = createVector(x, y);
         this.velocity = createVector(0, 0);
         this.acceleration = createVector(0, 0);
+        this.foodAttraction = dna[3];
         this.maxForce = 0.2;
         this.maxVelocity = random(1, 2);
         this.health = 100;

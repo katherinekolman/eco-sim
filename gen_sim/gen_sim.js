@@ -16,22 +16,24 @@ function findBestAgent() {
         }
     }
 
-    noFill();
-    stroke(255, 0, 0);
-    strokeWeight(3);
-    ellipse(bestAgent.position.x, bestAgent.position.y, 50, 50);
+    if (document.getElementById("best_agent").checked) {
+        noFill();
+        stroke(255, 0, 0);
+        strokeWeight(3);
+        ellipse(bestAgent.position.x, bestAgent.position.y, 50, 50);
+    }
 
     return bestAgent.fitness;
 }
 
 
 function setup() {
-    createCanvas(canvasWidth, canvasHeight);
-
+    canvas = createCanvas(canvasWidth, canvasHeight);
+    canvas.parent("sketch");
     //createEnvironment();
 
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism([3, 100, random(1, 2)], random(canvasWidth), random(canvasHeight));
+        organisms[i] = new Organism([3, 100, random(1, 2)], random(canvasWidth), random(canvasHeight), random(-1, 1));
     }
 
     for (let i = 0; i < numFood; i++) {
