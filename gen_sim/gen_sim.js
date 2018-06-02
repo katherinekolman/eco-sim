@@ -5,6 +5,26 @@ var numFood = 75;
 var canvasHeight = 650;
 var canvasWidth = 900;
 
+// function createEnvironment () {}
+
+// locates the agent with the highest fitness score
+function findBestAgent() {
+    bestAgent = organisms[0];
+    for (let i = 0; i < organisms.length; i++) {
+        if (organisms[i].fitness > bestAgent.fitness) {
+            bestAgent = organisms[i];
+        }
+    }
+
+    noFill();
+    stroke(255, 0, 0);
+    strokeWeight(3);
+    ellipse(bestAgent.position.x, bestAgent.position.y, 50, 50);
+
+    return bestAgent.fitness;
+}
+
+
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
 
@@ -22,6 +42,8 @@ function setup() {
 // updates the environment
 function draw() {
     background(150);
+    stroke(0);
+    strokeWeight(1);
 
     for (let i = organisms.length - 1; i > -1; i--) {
         if (organisms[i].health > 0) {
@@ -29,19 +51,16 @@ function draw() {
             organisms[i].findFood(nutrients);
             organisms[i].update();
         } else {
-            organisms[i].mutate(organisms[i].dna);
-            organisms.push(new Organism(organisms[i].dna, organisms[i].position.x, organisms[i].position.y));
+            if (((organisms[i].fitness / findBestAgent()) * random(.4, .7)) >= .3) { // FIXME find different way of calculating this
+                organisms[i].mutate(organisms[i].dna);
+                organisms.push(new Organism(organisms[i].dna, organisms[i].position.x, organisms[i].position.y));
+            }
+
             organisms.splice(i, 1);
+            stroke(0);
+            strokeWeight(1);
         }
     }
-
-    // old way of making organisms
-    // if (organisms.length == 0) {
-    //     genCount++;
-    //     for (let i = 0; i < numOrgs; i++) {
-    //         organisms[i] = new Organism(random(canvasWidth), random(canvasHeight));
-    //     }
-    // }
 
     while (nutrients.length < numFood) {
         nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(-20, 20)));
@@ -50,4 +69,8 @@ function draw() {
     for (let i = 0; i < nutrients.length; i++) {
         nutrients[i].display();
     }
+
+    findBestAgent();
+
+
 }

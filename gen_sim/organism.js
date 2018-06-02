@@ -1,5 +1,6 @@
 class Organism {
     constructor(dna, x, y) {
+        this.fitness = 0;
         this.position = createVector(x, y);
         this.velocity = createVector(0, 0);
         this.acceleration = createVector(0, 0);
@@ -17,10 +18,11 @@ class Organism {
         this.position.add(this.velocity);
         this.acceleration.mult(0);
         this.health -= 0.05;
+        this.fitness += .1;
     }
 
     // displays the location of the agent
-    display() {
+    display() { // triangle shaped
         let angle = this.velocity.heading() + PI / 2;
         push();
         translate(this.position.x, this.position.y);
