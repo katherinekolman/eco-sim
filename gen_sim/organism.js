@@ -42,12 +42,14 @@ class Organism {
     findFood(nutrients) {
         let distance = Infinity;
         let food = null;
-        let pull = -2;
+        let pull = Infinity;
         let d;
+        let index;
         let p;
 
         for (let i = 0; i < nutrients.length; i++) {
             d = nutrients[i].position.dist(this.position);
+
 
             if (d < 5) { // if it finds food
                 this.health += nutrients[i].nutrition;
@@ -64,11 +66,12 @@ class Organism {
 
             if (d < distance) {
                 distance = d;
+                index = i;
             }
 
-            p = (1 / distance) * this.foodAttraction[1];
+            p = d * abs(this.foodAttraction[0] - nutrients[i].nutrition);
 
-            if (p > pull) {
+            if (p < pull) {
                 pull = p;
                 food = nutrients[i];
             }

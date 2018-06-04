@@ -53,6 +53,12 @@ function showFoodAttraction() {
     }
 }
 
+function mousePressed() {
+    if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
+        organisms.push(new Organism([3, 100, random(1, 2), [random(-20, 20), random(1, 5)], random(50, 150)], mouseX, mouseY));
+    }
+}
+
 
 function setup() {
     canvas = createCanvas(canvasWidth, canvasHeight);
@@ -107,7 +113,5 @@ function draw() {
     if (document.getElementById("food_attraction").checked) {
         showFoodAttraction();
     }
-
-
 
 }
