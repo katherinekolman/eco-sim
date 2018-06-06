@@ -57,7 +57,7 @@ function showFoodAttraction() {
 
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(50, 150)], random(canvasWidth), random(canvasHeight)));
+        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(10, 120)], random(canvasWidth), random(canvasHeight)));
     }
 }
 
@@ -73,7 +73,7 @@ function setup() {
     }
 
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(50, 150)], random(canvasWidth), random(canvasHeight));
+        organisms[i] = new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(10, 120)], random(canvasWidth), random(canvasHeight));
     }
 }
 
@@ -90,7 +90,7 @@ function draw() {
             organisms[i].keepInBounds(canvasWidth, canvasHeight);
             organisms[i].update();
         } else {
-            if (((organisms[i].fitness / showBestAgent()) * random(.4, .7)) >= .3) { // FIXME find different way of calculating this
+            if (((organisms[i].fitness / showBestAgent()) + random(.1, .4)) >= .6) { // FIXME find different way of calculating this
                 organisms[i].mutate(organisms[i].dna);
                 organisms.push(new Organism(organisms[i].dna, organisms[i].position.x, organisms[i].position.y));
             }
