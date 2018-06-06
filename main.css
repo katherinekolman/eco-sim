@@ -1,0 +1,15 @@
+#sketch {
+    display: inline-block;
+}
+
+#table {
+    display: none;
+}
+
+#key {
+    display: block;
+}
+
+td, th {
+    border: 1px solid black;
+}

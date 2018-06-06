@@ -1,6 +1,6 @@
 var organisms = [];
 var nutrients = [];
-var numOrgs = 20;
+var numOrgs = 15;
 var numFood = 75;
 var canvasHeight = 650;
 var canvasWidth = 900;
@@ -23,7 +23,6 @@ function showBestAgent() {
         ellipse(bestAgent.position.x, bestAgent.position.y, 50, 50);
     }
 
-
     return bestAgent.fitness;
 }
 
@@ -32,30 +31,33 @@ function showFoodRadius() {
         noFill();
         stroke(0, 255, 0);
         strokeWeight(2);
-        ellipse(organisms[i].position.x, organisms[i].position.y, organisms[i].foodRadius);
+        ellipse(organisms[i].position.x, organisms[i].position.y, organisms[i].foodRadius * 2);
     }
 }
 
 function showFoodAttraction() {
     for (let i = 0; i < organisms.length; i++) {
         noFill();
-        stroke(map(organisms[i].foodAttraction[0], -20, 20, 255, 0), map(organisms[i].foodAttraction[0], -20, 20, 0, 255), 0);
-        strokeWeight(2);
-        //line(organisms[i].position.x, organisms[i].position.y,
-        //    organisms[i].position.x + map(organisms[i].foodAttraction, -1, 1, 1, 50),
-        //    organisms[i].position.y + map(organisms[i].foodAttraction, -1, 1, 1, 50)).rotate(organisms[i].position.heading());
+        stroke(map(organisms[i].foodAttraction[0], 0, 10, 255, 0), map(organisms[i].foodAttraction[0], 0, 10, 0, 255), 0);
+        strokeWeight(1);
         let angle = organisms[i].velocity.heading() - PI / 2;
         push();
         translate(organisms[i].position.x, organisms[i].position.y);
         rotate(angle);
-        line(0, 0, 0, organisms[i].foodAttraction[1] * 15);
+        line(0, 0, 0, organisms[i].foodAttraction[0] * 10);
+        stroke(map(organisms[i].foodAttraction[1], 0, 10, 255, 0), map(organisms[i].foodAttraction[1], 0, 10, 0, 255), 0);
+        strokeWeight(2);
+        line(0, 0, 0, organisms[i].foodAttraction[1] * 10);
+        stroke(map(organisms[i].foodAttraction[2], 0, 10, 255, 0), map(organisms[i].foodAttraction[2], 0, 10, 0, 255), 0);
+        strokeWeight(3);
+        line(0, 0, 0, organisms[i].foodAttraction[2] * 10);
         pop();
     }
 }
 
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(-20, 20), random(1, 5)], random(50, 150)], mouseX, mouseY));
+        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(50, 150)], random(canvasWidth), random(canvasHeight)));
     }
 }
 
@@ -65,12 +67,13 @@ function setup() {
     canvas.parent("sketch");
     //createEnvironment();
 
+    foodValues = [-20, 3, 15];
     for (let i = 0; i < numFood; i++) {
-        nutrients[i] = new Food(random(canvasWidth), random(canvasHeight), random(-20, 20));
+        nutrients[i] = new Food(random(canvasWidth), random(canvasHeight), random(foodValues));
     }
 
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism([3, 100, random(1, 2), [random(-20, 20), random(1, 5)], random(50, 150)], random(canvasWidth), random(canvasHeight));
+        organisms[i] = new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(50, 150)], random(canvasWidth), random(canvasHeight));
     }
 }
 
@@ -99,7 +102,7 @@ function draw() {
     }
 
     while (nutrients.length < numFood) {
-        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(-20, 20)));
+        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues)));
     }
 
     for (let i = 0; i < nutrients.length; i++) {

@@ -3,26 +3,49 @@
  -->
 
 <html>
+
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <script defer src=https://CDN.JSDelivr.net/npm/p5></script>
-  <script defer src=https://CDN.JSDelivr.net/npm/p5/lib/addons/p5.dom.min.js></script>
-  <script language="javascript" type="text/javascript" src="gen_sim/food.js"></script>
-  <script language="javascript" type="text/javascript" src="gen_sim/organism.js"></script>
-  <script language="javascript" type="text/javascript" src="gen_sim/gen_sim.js"></script>
+    <script defer src=https://CDN.JSDelivr.net/npm/p5></script>
+    <script defer src=https://CDN.JSDelivr.net/npm/p5/lib/addons/p5.dom.min.js></script>
+    <script language="javascript" type="text/javascript" src="gen_sim/food.js"></script>
+    <script language="javascript" type="text/javascript" src="gen_sim/organism.js"></script>
+    <script language="javascript" type="text/javascript" src="gen_sim/gen_sim.js"></script>
+    <link rel="stylesheet" href="main.css">
 
-  <style> body {padding: 0; margin: 0;} </style>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
     <div id="sketch"></div>
-    <input id="best_agent" type="checkbox">
-    <label for="best_agent">Show best agent</label>
-    <input id="food_attraction" type="checkbox">
-    <label for="food_attraction">Show food attraction</label>
-    <input id="food_radius" type="checkbox">
-    <label for="food_radius">Show food detection radius of each agent</label>
+    <div id="table">
+        <table>
+            <tr>
+                <th>Organism</th>
+                <th>Size</th>
+                <th>Health</th>
+                <th>Max Speed</th>
+                <th>Food Type Attraction</th>
+                <th>Food Radius</th>
+            </tr>
+        </table>
+    </div>
+
+    <div id="key">
+        <input id="best_agent" type="checkbox">
+        <label for="best_agent">Show best agent</label>
+        <input id="food_attraction" type="checkbox">
+        <label for="food_attraction">Show food attraction</label>
+        <input id="food_radius" type="checkbox">
+        <label for="food_radius">Show food detection radius of each agent</label>
+    </div>
 
 </body>
+
 </html>

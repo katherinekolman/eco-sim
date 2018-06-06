@@ -4,13 +4,13 @@ class Organism {
         this.position = createVector(x, y);
         this.velocity = createVector(random(1), random(1));
         this.acceleration = createVector(0, 0);
-        this.foodAttraction = dna[3]; // index 0 is nutrient level attraction, 1 is strength of attraction
+        this.foodAttraction = dna[3]; // each index corresponds to diff food type
         this.foodRadius = dna[4];
         this.maxForce = 0.2;
-        this.maxVelocity = random(1, 2);
-        this.health = 100;
-        this.size = 3;
-        this.dna = [this.size, this.health, this.maxVelocity, this.foodAttraction, this.foodRadius];
+        this.maxVelocity = dna[2];
+        this.health = dna[1];
+        this.size = dna[0];
+        this.dna = dna;
     }
 
     // updates the physics and health of the agent
@@ -40,16 +40,14 @@ class Organism {
 
     // finds the closest food and updates health
     findFood(nutrients) {
-        let distance = Infinity;
         let food = null;
-        let pull = Infinity;
+        let pull = -Infinity;
         let d;
-        let index;
         let p;
+        let type;
 
         for (let i = 0; i < nutrients.length; i++) {
             d = nutrients[i].position.dist(this.position);
-
 
             if (d < 5) { // if it finds food
                 this.health += nutrients[i].nutrition;
@@ -64,14 +62,22 @@ class Organism {
                 continue;
             }
 
-            if (d < distance) {
-                distance = d;
-                index = i;
+            switch(nutrients[i].nutrition) {
+                case -20:
+                    type = 0;
+                    break;
+                case 15:
+                    type = 2;
+                    break;
+                case 3:
+                default:
+                    type = 1;
+                    break;
             }
 
-            p = d * abs(this.foodAttraction[0] - nutrients[i].nutrition);
+            p = (1 / d) * this.foodAttraction[type];
 
-            if (p < pull) {
+            if (p > pull) {
                 pull = p;
                 food = nutrients[i];
             }
@@ -80,9 +86,7 @@ class Organism {
         if (food == null) {
             return;
         }
-
         this.seek(food);
-
     }
 
     // physics for seeking the desired food object
