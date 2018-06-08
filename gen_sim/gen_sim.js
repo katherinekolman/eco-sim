@@ -1,9 +1,10 @@
+var bkgdPixels = [];
 var organisms = [];
 var nutrients = [];
 var numOrgs = 15;
 var numFood = 75;
-var canvasHeight = 650;
-var canvasWidth = 900;
+var canvasHeight = 650; // 650
+var canvasWidth = 900;  // 900
 
 // function createEnvironment () {}
 
@@ -61,11 +62,21 @@ function mousePressed() {
     }
 }
 
+function createEnvironment() {
+    background(0);
+    fill(253, 253, 253, 0);
+    for (let i = 0; i < 500; i++) {
+        bkgdPixels.push({
+            x: random(canvasWidth),
+            y: random(canvasHeight)
+        });
+    }
+}
 
 function setup() {
     canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent("sketch");
-    //createEnvironment();
+    createEnvironment();
 
     foodValues = [-20, 3, 15];
     for (let i = 0; i < numFood; i++) {
@@ -73,15 +84,24 @@ function setup() {
     }
 
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(10, 120)], random(canvasWidth), random(canvasHeight));
+        organisms[i] = new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120)], random(canvasWidth), random(canvasHeight));
     }
+}
+
+function updateBackground() {
+    //background(0);
+    fill(0, 120);
+    noStroke();
+    rect(0, 0, width,height);
+    // for (let i = 0; i < bkgdPixels.length; i++) {
+    //     fill(253);
+    //     ellipse(bkgdPixels[i].x, bkgdPixels[i].y, 2, 2);
+    // }
 }
 
 // updates the environment
 function draw() {
-    background(150);
-    stroke(0);
-    strokeWeight(1);
+    updateBackground();
 
     for (let i = organisms.length - 1; i > -1; i--) {
         if (organisms[i].health > 0) {
