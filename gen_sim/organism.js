@@ -1,16 +1,24 @@
 class Organism {
     constructor(dna, x, y) {
-        this.fitness = 0;
+        // physics of agent
         this.position = createVector(x, y);
         this.velocity = createVector(random(1), random(1));
         this.acceleration = createVector(0, 0);
-        this.foodAttraction = dna[3]; // each index corresponds to diff food type
-        this.foodRadius = dna[4];
         this.maxForce = 0.2;
-        this.maxVelocity = dna[2];
-        this.health = dna[1];
-        this.size = dna[0];
+
+        // fitness score
+        this.fitness = 0;
+
+        // hunger level
+        this.hunger = 0;
+
+        // dna values
         this.dna = dna;
+        this.size = dna[0];
+        this.health = dna[1];
+        this.maxVelocity = dna[2];
+        this.foodAttraction = dna[3];
+        this.perceptionRadius = dna[4];
     }
 
     // updates the physics and health of the agent
@@ -21,6 +29,7 @@ class Organism {
         this.acceleration.mult(0);
         this.health -= 0.05;
         this.fitness += .1;
+        this.hunger += 0.05;
     }
 
     // displays the location of the agent
@@ -42,9 +51,9 @@ class Organism {
     findFood(nutrients) {
         let food = null;
         let pull = -Infinity;
-        let d;
-        let p;
-        let type;
+        let d; // distance
+        let p; // calculated attraction to food
+        let type; // type of food
 
         for (let i = 0; i < nutrients.length; i++) {
             d = nutrients[i].position.dist(this.position);
@@ -58,7 +67,7 @@ class Organism {
                 return;
             }
 
-            if (d > this.foodRadius) {
+            if (d > this.perceptionRadius) {
                 continue;
             }
 
