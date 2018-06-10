@@ -30,6 +30,14 @@ class Organism {
         this.health -= 0.05;
         this.fitness += .1;
         this.hunger += 0.05;
+
+        if (this.hunger > 100) {
+            this.health -= 1;
+        } else if (this.hunger > 60) {
+            this.health -= .6;
+        } else if (this.hunger > 30) {
+            this.health -= .3;
+        }
     }
 
     // displays the location of the agent
@@ -60,9 +68,14 @@ class Organism {
 
             if (d < 5) { // if it finds food
                 this.health += nutrients[i].nutrition;
+                this.hunger -= 25;
                 if (this.health > 100) {
                     this.health = 100;
                 }
+                if (this.hunger < 0) {
+                    this.hunger = 0;
+                }
+
                 nutrients.splice(i, 1);
                 return;
             }

@@ -59,7 +59,7 @@ function showFoodAttraction() {
 // adds a new agent to environment if user clicks
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(10, 120)], random(canvasWidth), random(canvasHeight)));
+        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120)], random(canvasWidth), random(canvasHeight)));
     }
 }
 
