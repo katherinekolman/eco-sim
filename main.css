@@ -11,19 +11,3 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-#sketch {
-
-}
-
-#table {
-    display: none;
-}
-
-#key {
-
-}
-
-td, th {
-    border: 1px solid black;
-}

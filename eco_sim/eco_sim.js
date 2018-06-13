@@ -4,8 +4,8 @@ var rabbitFrames = [];
 var flowerImages = [];
 var numOrgs = 5;
 var numFood = 30;
-var canvasHeight = 416; // 650
-var canvasWidth = 544; // 900
+var canvasHeight = 416;
+var canvasWidth = 544;
 var bg;
 
 // locates the agent with the highest fitness score
@@ -37,6 +37,7 @@ function showPerceptionRadius() {
     }
 }
 
+// shows the attraction each agent has to the 3 food types
 function showFoodAttraction() {
     for (let i = 0; i < organisms.length; i++) {
         noFill();
@@ -67,6 +68,7 @@ function mousePressed() {
     }
 }
 
+// loads all the necessary images into their respective arrays
 function loadImages() {
     rabbitFrames.push(loadImage("eco_sim/images/rabbitb2.png"));
     rabbitFrames.push(loadImage("eco_sim/images/rabbitb1.png"));

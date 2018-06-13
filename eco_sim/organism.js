@@ -45,17 +45,6 @@ class Organism {
 
     // displays the location of the agent
     display() { // triangle shaped
-        // let angle = this.velocity.heading() + PI / 2;
-        // push();
-        // translate(this.position.x, this.position.y);
-        // rotate(angle);
-        // fill(map(this.health, 0, 100, 255, 0), map(this.health, 0, 100, 0, 255), 0);
-        // beginShape();
-        // vertex(0, -this.size * 3);
-        // vertex(-this.size * 2, this.size * 3);
-        // vertex(this.size * 2, this.size * 3);
-        // endShape(CLOSE);
-        // pop();
         let frame;
         let heading = this.velocity.heading()
         if (heading > -0.75 && heading < 0.75) { // left
