@@ -1,7 +1,7 @@
 # eco-sim
 This project is based on Daniel Shiffman's [Evolutionary Steering Behavior](https://www.youtube.com/watch?v=flxOkx0yLrY). For this project, I'm using [Processing](https://processing.org/) and the [p5.js](https://p5js.org/) library.
 
-The simulation can be found [here](https://katherinekolman.github.io/genetic-simulation/).
+The simulation can be found [here](https://katherinekolman.github.io/eco-sim/).
 
 ## What is this?
 

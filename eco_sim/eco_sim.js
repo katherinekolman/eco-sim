@@ -62,32 +62,32 @@ function showFoodAttraction() {
 // adds a new agent to environment if user clicks
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120), loadImage("gen_sim/images/frogsright2.png")],
+        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120), loadImage("eco_sim/images/frogsright2.png")],
         mouseX, mouseY));
     }
 }
 
 function loadImages() {
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitb2.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitb1.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitb3.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitl2.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitl1.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitl3.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitr2.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitr1.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitr3.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitf2.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitf1.png"));
-    rabbitFrames.push(loadImage("gen_sim/images/rabbitf3.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitb2.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitb1.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitb3.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitl2.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitl1.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitl3.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitr2.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitr1.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitr3.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitf2.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitf1.png"));
+    rabbitFrames.push(loadImage("eco_sim/images/rabbitf3.png"));
 
-    flowerImages.push(loadImage("gen_sim/images/blueflower.png"));
-    flowerImages.push(loadImage("gen_sim/images/redflower.png"));
-    flowerImages.push(loadImage("gen_sim/images/purpleflower.png"));
+    flowerImages.push(loadImage("eco_sim/images/blueflower.png"));
+    flowerImages.push(loadImage("eco_sim/images/redflower.png"));
+    flowerImages.push(loadImage("eco_sim/images/purpleflower.png"));
 }
 
 function setup() {
-    bg = loadImage("gen_sim/images/grasstileset.png");
+    bg = loadImage("eco_sim/images/grasstileset.png");
     canvas = createCanvas(canvasWidth, canvasHeight, P2D);
     canvas.parent("sketch");
     loadImages();
