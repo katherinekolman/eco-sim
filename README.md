@@ -1,7 +1,7 @@
-# genetic-simulation
-This project is based on Daniel Shiffman's [Evolutionary Steering Behavior](https://www.youtube.com/watch?v=flxOkx0yLrY). For this project, I'm using [Processing](https://processing.org/) and the [p5.js](https://p5js.org/) library for easy viewing in the browser.
+# eco-sim
+This project is based on Daniel Shiffman's [Evolutionary Steering Behavior](https://www.youtube.com/watch?v=flxOkx0yLrY). For this project, I'm using [Processing](https://processing.org/) and the [p5.js](https://p5js.org/) library.
 
-The simulation can be found [here](https://katherinekolman.github.io/genetic-simulation/) (warning: very early in development, so it's not going to look the prettiest).
+The simulation can be found [here](https://katherinekolman.github.io/genetic-simulation/).
 
 ## What is this?
 
@@ -15,3 +15,14 @@ There are a few things I want to accomplish with this project:
 
  * Learn more about Processing.
  * Improve JavaScript skills.
+
+## Resources
+Languages
+* JavaScript ([p5.js](https://p5js.org/))
+* HTML/CSS (with [Bootstrap](https://getbootstrap.com/))
+
+Art
+
+* Background made by [Momofumi](https://momofumi.wordpress.com/)
+* Flowers made by [Sharm](https://opengameart.org/content/lpc-flower-recolor)
+* Animals are from [here](https://forums.rpgmakerweb.com/index.php?threads/grannys-lists-vx-ace-animal-sprites.30456/)
