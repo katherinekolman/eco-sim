@@ -1,11 +1,19 @@
 body {
     padding: 0;
     margin: 0;
-    background: #476b3e;
+    background: #49635e;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #sketch {
-    display: inline-block;
+
 }
 
 #table {
@@ -13,7 +21,7 @@ body {
 }
 
 #key {
-    display: block;
+
 }
 
 td, th {

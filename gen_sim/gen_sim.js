@@ -2,7 +2,7 @@ var organisms = [];
 var nutrients = [];
 var rabbitFrames = [];
 var flowerImages = [];
-var numOrgs = 1;
+var numOrgs = 5;
 var numFood = 30;
 var canvasHeight = 416; // 650
 var canvasWidth = 544; // 900
@@ -21,7 +21,7 @@ function showBestAgent() {
         noFill();
         stroke(255, 0, 0);
         strokeWeight(3);
-        ellipse(bestAgent.position.x, bestAgent.position.y, 50, 50);
+        ellipse(bestAgent.position.x + 15, bestAgent.position.y + 15, 50, 50);
     }
 
     return bestAgent.fitness;
@@ -33,7 +33,7 @@ function showPerceptionRadius() {
         noFill();
         stroke(0, 255, 0);
         strokeWeight(2);
-        ellipse(organisms[i].position.x, organisms[i].position.y, organisms[i].perceptionRadius * 2);
+        ellipse(organisms[i].position.x + 15, organisms[i].position.y + 15, organisms[i].perceptionRadius * 2);
     }
 }
 
@@ -46,7 +46,7 @@ function showFoodAttraction() {
         let angle = organisms[i].velocity.heading() - PI / 2;
 
         push();
-        translate(organisms[i].position.x, organisms[i].position.y);
+        translate(organisms[i].position.x + 15, organisms[i].position.y + 15);
         rotate(angle);
         line(0, 0, 0, organisms[i].foodAttraction[0] * 10); // attraction to most nutritious food
         stroke(map(organisms[i].foodAttraction[1], 0, 10, 255, 0), map(organisms[i].foodAttraction[1], 0, 10, 0, 255), 0);
