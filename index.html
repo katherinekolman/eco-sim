@@ -12,40 +12,24 @@
     <script language="javascript" type="text/javascript" src="gen_sim/food.js"></script>
     <script language="javascript" type="text/javascript" src="gen_sim/organism.js"></script>
     <script language="javascript" type="text/javascript" src="gen_sim/gen_sim.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
 
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="sketch"></div>
-    <div id="table">
-        <table>
-            <tr>
-                <th>Organism</th>
-                <th>Size</th>
-                <th>Health</th>
-                <th>Max Speed</th>
-                <th>Food Type Attraction</th>
-                <th>Food Radius</th>
-            </tr>
-        </table>
-    </div>
+    <div class="container justify-contents-center">
+        <div id="sketch" class="row"></div>
 
-    <div id="key">
-        <input id="best_agent" type="checkbox">
-        <label for="best_agent">Show best agent</label>
-        <input id="food_attraction" type="checkbox">
-        <label for="food_attraction">Show food attraction</label>
-        <input id="food_radius" type="checkbox">
-        <label for="food_radius">Show food detection radius of each agent</label>
+        <div id="key" class="row">
+            <input id="best_agent" type="checkbox">
+            <label for="best_agent">Show best agent</label>
+            <input id="food_attraction" type="checkbox">
+            <label for="food_attraction">Show food attraction</label>
+            <input id="food_radius" type="checkbox">
+            <label for="food_radius">Show food detection radius of each agent</label>
+        </div>
     </div>
-
 </body>
 
 </html>

@@ -2,7 +2,7 @@ class Organism {
     constructor(dna, x, y) {
         // physics of agent
         this.position = createVector(x, y);
-        this.velocity = createVector(random(1), random(1));
+        this.velocity = createVector(random(3), random(3));
         this.acceleration = createVector(0, 0);
         this.maxForce = 0.2;
 
@@ -12,6 +12,8 @@ class Organism {
         // hunger level
         this.hunger = 0;
 
+        this.frameCounter = 0;
+
         // dna values
         this.dna = dna;
         this.size = dna[0];
@@ -19,6 +21,7 @@ class Organism {
         this.maxVelocity = dna[2];
         this.foodAttraction = dna[3];
         this.perceptionRadius = dna[4];
+        this.animal = dna[5];
     }
 
     // updates the physics and health of the agent
@@ -42,17 +45,31 @@ class Organism {
 
     // displays the location of the agent
     display() { // triangle shaped
-        let angle = this.velocity.heading() + PI / 2;
-        push();
-        translate(this.position.x, this.position.y);
-        rotate(angle);
-        fill(map(this.health, 0, 100, 255, 0), map(this.health, 0, 100, 0, 255), 0);
-        beginShape();
-        vertex(0, -this.size * 3);
-        vertex(-this.size * 2, this.size * 3);
-        vertex(this.size * 2, this.size * 3);
-        endShape(CLOSE);
-        pop();
+        // let angle = this.velocity.heading() + PI / 2;
+        // push();
+        // translate(this.position.x, this.position.y);
+        // rotate(angle);
+        // fill(map(this.health, 0, 100, 255, 0), map(this.health, 0, 100, 0, 255), 0);
+        // beginShape();
+        // vertex(0, -this.size * 3);
+        // vertex(-this.size * 2, this.size * 3);
+        // vertex(this.size * 2, this.size * 3);
+        // endShape(CLOSE);
+        // pop();
+        let frame;
+        let heading = this.velocity.heading()
+        if (heading > -0.75 && heading < 0.75) { // left
+            frame = rabbitFrames[(this.frameCounter % 3) + 6];
+        } else if (heading < -0.75 && heading > -2.35) { // up
+            frame = rabbitFrames[(this.frameCounter % 3)];
+        } else if (heading < -2.35 || heading > 2.35) { // right
+            frame = rabbitFrames[(this.frameCounter % 3) + 3];
+        } else { // down
+            frame = rabbitFrames[(this.frameCounter % 3) + 9];
+        }
+
+        image(frame, this.position.x, this.position.y);
+        this.frameCounter++;
     }
 
     // finds the closest food and updates health
@@ -84,7 +101,7 @@ class Organism {
                 continue;
             }
 
-            switch(nutrients[i].nutrition) {
+            switch (nutrients[i].nutrition) {
                 case -20:
                     type = 0;
                     break;

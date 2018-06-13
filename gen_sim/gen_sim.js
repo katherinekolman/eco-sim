@@ -1,9 +1,11 @@
 var organisms = [];
 var nutrients = [];
-var numOrgs = 15;
+var rabbitFrames = [];
+var numOrgs = 1;
 var numFood = 75;
-var canvasHeight = 650; // 650
-var canvasWidth = 1200; // 900
+var canvasHeight = 416; // 650
+var canvasWidth = 544; // 900
+var bg;
 
 // locates the agent with the highest fitness score
 function showBestAgent() {
@@ -59,14 +61,33 @@ function showFoodAttraction() {
 // adds a new agent to environment if user clicks
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120)], random(canvasWidth), random(canvasHeight)));
+        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120), loadImage("gen_sim/images/frogsright2.png")],
+        mouseX, mouseY));
     }
 }
 
+function loadAnimalImages() {
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitb2.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitb1.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitb3.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitl2.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitl1.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitl3.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitr2.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitr1.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitr3.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitf2.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitf1.png"));
+    rabbitFrames.push(loadImage("gen_sim/images/rabbitf3.png"));
+}
+
 function setup() {
-    canvas = createCanvas(canvasWidth, canvasHeight);
+    bg = loadImage("gen_sim/images/grasstileset.png");
+    canvas = createCanvas(canvasWidth, canvasHeight, P2D);
     canvas.parent("sketch");
-    background(150);
+    loadAnimalImages();
+
+    frameRate(8);
 
     foodValues = [-20, 3, 15];
     for (let i = 0; i < numFood; i++) {
@@ -75,7 +96,8 @@ function setup() {
 
     // populate environment with random agents
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120)], random(canvasWidth), random(canvasHeight));
+        organisms[i] = new Organism([3, 100, random(3, 5), [random(10), random(10), random(10)], random(20, 120), rabbitFrames],
+        random(canvasWidth), random(canvasHeight));
     }
 }
 
@@ -83,7 +105,7 @@ function setup() {
 function draw() {
     stroke(0);
     strokeWeight(1);
-    background(150);
+    background(bg);
 
     for (let i = organisms.length - 1; i > -1; i--) {
         if (organisms[i].health > 0) {
@@ -108,7 +130,7 @@ function draw() {
     }
 
     for (let i = 0; i < nutrients.length; i++) {
-        nutrients[i].display();
+    //    nutrients[i].display();
     }
 
     // debugging info
