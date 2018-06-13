@@ -1,8 +1,9 @@
 var organisms = [];
 var nutrients = [];
 var rabbitFrames = [];
+var flowerImages = [];
 var numOrgs = 1;
-var numFood = 75;
+var numFood = 30;
 var canvasHeight = 416; // 650
 var canvasWidth = 544; // 900
 var bg;
@@ -66,7 +67,7 @@ function mousePressed() {
     }
 }
 
-function loadAnimalImages() {
+function loadImages() {
     rabbitFrames.push(loadImage("gen_sim/images/rabbitb2.png"));
     rabbitFrames.push(loadImage("gen_sim/images/rabbitb1.png"));
     rabbitFrames.push(loadImage("gen_sim/images/rabbitb3.png"));
@@ -79,19 +80,23 @@ function loadAnimalImages() {
     rabbitFrames.push(loadImage("gen_sim/images/rabbitf2.png"));
     rabbitFrames.push(loadImage("gen_sim/images/rabbitf1.png"));
     rabbitFrames.push(loadImage("gen_sim/images/rabbitf3.png"));
+
+    flowerImages.push(loadImage("gen_sim/images/blueflower.png"));
+    flowerImages.push(loadImage("gen_sim/images/redflower.png"));
+    flowerImages.push(loadImage("gen_sim/images/purpleflower.png"));
 }
 
 function setup() {
     bg = loadImage("gen_sim/images/grasstileset.png");
     canvas = createCanvas(canvasWidth, canvasHeight, P2D);
     canvas.parent("sketch");
-    loadAnimalImages();
+    loadImages();
 
     frameRate(8);
 
     foodValues = [-20, 3, 15];
     for (let i = 0; i < numFood; i++) {
-        nutrients[i] = new Food(random(canvasWidth), random(canvasHeight), random(foodValues));
+        nutrients[i] = new Food(random(canvasWidth), random(canvasHeight), random(foodValues), flowerImages);
     }
 
     // populate environment with random agents
@@ -126,11 +131,11 @@ function draw() {
     }
 
     while (nutrients.length < numFood) {
-        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues)));
+        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues), flowerImages));
     }
 
     for (let i = 0; i < nutrients.length; i++) {
-    //    nutrients[i].display();
+        nutrients[i].display();
     }
 
     // debugging info
