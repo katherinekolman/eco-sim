@@ -23,6 +23,6 @@ Languages
 
 Art
 
-* Background made by [Momofumi](https://momofumi.wordpress.com/)
+* Background from [here](https://opengameart.org/content/seamless-grass-textures-20-pack)
 * Flowers made by [Sharm](https://opengameart.org/content/lpc-flower-recolor)
 * Animals are from [here](https://forums.rpgmakerweb.com/index.php?threads/grannys-lists-vx-ace-animal-sprites.30456/)

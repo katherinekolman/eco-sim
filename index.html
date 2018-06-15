@@ -8,23 +8,33 @@
     <script defer src=https://CDN.JSDelivr.net/npm/p5/lib/addons/p5.dom.min.js></script>
     <script language="javascript" type="text/javascript" src="eco_sim/food.js"></script>
     <script language="javascript" type="text/javascript" src="eco_sim/organism.js"></script>
-    <script language="javascript" type="text/javascript" src="eco_sim/eco_sim.js"></script>
+    <script language="javascript" type="text/javascript" src="eco_sim/main.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-    <div class="container">
-        <div id="sketch" class="col"></div>
-        <div id="debug_info" class="col">
-            <input id="best_agent" type="checkbox">
-            <label for="best_agent">Show best agent</label><br/>
-            <input id="food_attraction" type="checkbox">
-            <label for="food_attraction">Show food attraction</label><br/>
-            <input id="food_radius" type="checkbox">
-            <label for="food_radius">Show food detection radius of each agent</label>
+    <div class="container-fluid">
+        <div id="sketch" class="row"></div>
+    </div>
+    <div class="container-fluid">
+        <div id="debug_info">
+            <div class="col debug">
+                <input id="best_agent" type="checkbox">
+                <label for="best_agent">Best agent</label><br/>
+            </div>
+            <div class="col debug">
+                <input id="food_attraction" type="checkbox">
+                <label for="food_attraction">Food attraction</label><br/>
+            </div>
+            <div class="col debug">
+                <input id="food_radius" type="checkbox">
+                <label for="food_radius">Food detection radius</label>
+            </div>
         </div>
     </div>
+
 </body>
 
 </html>

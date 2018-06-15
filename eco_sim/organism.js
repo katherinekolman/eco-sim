@@ -48,13 +48,13 @@ class Organism {
         let frame;
         let heading = this.velocity.heading()
         if (heading > -0.75 && heading < 0.75) { // left
-            frame = rabbitFrames[(this.frameCounter % 3) + 6];
+            frame = this.animal[(this.frameCounter % 3) + 6];
         } else if (heading < -0.75 && heading > -2.35) { // up
-            frame = rabbitFrames[(this.frameCounter % 3)];
+            frame = this.animal[(this.frameCounter % 3)];
         } else if (heading < -2.35 || heading > 2.35) { // right
-            frame = rabbitFrames[(this.frameCounter % 3) + 3];
+            frame = this.animal[(this.frameCounter % 3) + 3];
         } else { // down
-            frame = rabbitFrames[(this.frameCounter % 3) + 9];
+            frame = this.animal[(this.frameCounter % 3) + 9];
         }
 
         image(frame, this.position.x, this.position.y);
@@ -62,7 +62,7 @@ class Organism {
     }
 
     // finds the closest food and updates health
-    findFood(nutrients) {
+    findFood() {
         let food = null;
         let pull = -Infinity;
         let d; // distance

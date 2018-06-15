@@ -4,8 +4,8 @@ var rabbitFrames = [];
 var flowerImages = [];
 var numOrgs = 5;
 var numFood = 30;
-var canvasHeight = 416;
-var canvasWidth = 544;
+var canvasWidth = window.innerWidth;
+var canvasHeight = window.innerHeight - window.innerHeight * .15; 
 var bg;
 
 // locates the agent with the highest fitness score
@@ -63,8 +63,8 @@ function showFoodAttraction() {
 // adds a new agent to environment if user clicks
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120), loadImage("eco_sim/images/frogsright2.png")],
-        mouseX, mouseY));
+        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120), rabbitFrames],
+            mouseX, mouseY));
     }
 }
 
@@ -89,11 +89,10 @@ function loadImages() {
 }
 
 function setup() {
-    bg = loadImage("eco_sim/images/grasstileset.png");
+    bg = loadImage("eco_sim/images/grass20.png");
     canvas = createCanvas(canvasWidth, canvasHeight, P2D);
     canvas.parent("sketch");
     loadImages();
-
     frameRate(8);
 
     foodValues = [-20, 3, 15];
@@ -104,15 +103,21 @@ function setup() {
     // populate environment with random agents
     for (let i = 0; i < numOrgs; i++) {
         organisms[i] = new Organism([3, 100, random(3, 5), [random(10), random(10), random(10)], random(20, 120), rabbitFrames],
-        random(canvasWidth), random(canvasHeight));
+            random(canvasWidth), random(canvasHeight));
     }
 }
 
 // updates the environment
 function draw() {
-    stroke(0);
-    strokeWeight(1);
     background(bg);
+
+    while (nutrients.length < numFood) {
+        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues), flowerImages));
+    }
+
+    for (let i = 0; i < nutrients.length; i++) {
+        nutrients[i].display();
+    }
 
     for (let i = organisms.length - 1; i > -1; i--) {
         if (organisms[i].health > 0) {
@@ -130,14 +135,6 @@ function draw() {
             stroke(0);
             strokeWeight(1);
         }
-    }
-
-    while (nutrients.length < numFood) {
-        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues), flowerImages));
-    }
-
-    for (let i = 0; i < nutrients.length; i++) {
-        nutrients[i].display();
     }
 
     // debugging info
