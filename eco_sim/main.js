@@ -5,7 +5,7 @@ var flowerImages = [];
 var numOrgs = 5;
 var numFood = 30;
 var canvasWidth = window.innerWidth;
-var canvasHeight = window.innerHeight - window.innerHeight * .15; 
+var canvasHeight = window.innerHeight - window.innerHeight * .15;
 var bg;
 
 // locates the agent with the highest fitness score
@@ -63,7 +63,7 @@ function showFoodAttraction() {
 // adds a new agent to environment if user clicks
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(20, 120), rabbitFrames],
+        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             mouseX, mouseY));
     }
 }
@@ -97,12 +97,12 @@ function setup() {
 
     foodValues = [-20, 3, 15];
     for (let i = 0; i < numFood; i++) {
-        nutrients[i] = new Food(random(canvasWidth), random(canvasHeight), random(foodValues), flowerImages);
+        nutrients[i] = new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues), flowerImages);
     }
 
     // populate environment with random agents
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism([3, 100, random(3, 5), [random(10), random(10), random(10)], random(20, 120), rabbitFrames],
+        organisms[i] = new Organism([3, 100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             random(canvasWidth), random(canvasHeight));
     }
 }
