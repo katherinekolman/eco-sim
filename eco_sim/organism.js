@@ -34,7 +34,7 @@ class Organism {
         this.velocity.limit(this.maxVelocity);
         this.position.add(this.velocity);
         this.acceleration.mult(0);
-        this.health -= 0.05;
+        this.health -= 0.01;
         this.fitness += .1;
         this.hunger += 0.05;
 
