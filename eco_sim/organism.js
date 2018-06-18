@@ -12,7 +12,11 @@ class Organism {
         // hunger level
         this.hunger = 0;
 
+        // for graphics
         this.frameCounter = 0;
+
+        this.num = num;
+        num++;
 
         // dna values
         this.dna = dna;

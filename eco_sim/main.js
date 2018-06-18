@@ -5,60 +5,10 @@ var flowerImages = [];
 var numOrgs = 5;
 var numFood = 30;
 var canvasWidth = window.innerWidth;
-var canvasHeight = window.innerHeight - window.innerHeight * .15;
+var canvasHeight = window.innerHeight;
 var bg;
+var num = 0;
 
-// locates the agent with the highest fitness score
-function showBestAgent() {
-    bestAgent = organisms[0];
-    for (let i = 0; i < organisms.length; i++) {
-        if (organisms[i].fitness > bestAgent.fitness) {
-            bestAgent = organisms[i];
-        }
-    }
-
-    if (document.getElementById("best_agent").checked) {
-        noFill();
-        stroke(255, 0, 0);
-        strokeWeight(3);
-        ellipse(bestAgent.position.x + 15, bestAgent.position.y + 15, 50, 50);
-    }
-
-    return bestAgent.fitness;
-}
-
-// shows how far the agent can detect things
-function showPerceptionRadius() {
-    for (let i = 0; i < organisms.length; i++) {
-        noFill();
-        stroke(0, 255, 0);
-        strokeWeight(2);
-        ellipse(organisms[i].position.x + 15, organisms[i].position.y + 15, organisms[i].perceptionRadius * 2);
-    }
-}
-
-// shows the attraction each agent has to the 3 food types
-function showFoodAttraction() {
-    for (let i = 0; i < organisms.length; i++) {
-        noFill();
-        stroke(map(organisms[i].foodAttraction[0], 0, 10, 255, 0), map(organisms[i].foodAttraction[0], 0, 10, 0, 255), 0);
-        strokeWeight(1);
-
-        let angle = organisms[i].velocity.heading() - PI / 2;
-
-        push();
-        translate(organisms[i].position.x + 15, organisms[i].position.y + 15);
-        rotate(angle);
-        line(0, 0, 0, organisms[i].foodAttraction[0] * 10); // attraction to most nutritious food
-        stroke(map(organisms[i].foodAttraction[1], 0, 10, 255, 0), map(organisms[i].foodAttraction[1], 0, 10, 0, 255), 0);
-        strokeWeight(2);
-        line(0, 0, 0, organisms[i].foodAttraction[1] * 10); // attraction to semi-nutritous food
-        stroke(map(organisms[i].foodAttraction[2], 0, 10, 255, 0), map(organisms[i].foodAttraction[2], 0, 10, 0, 255), 0);
-        strokeWeight(3);
-        line(0, 0, 0, organisms[i].foodAttraction[2] * 10); // attraction to poisonous food
-        pop();
-    }
-}
 
 // adds a new agent to environment if user clicks
 function mousePressed() {
@@ -105,11 +55,14 @@ function setup() {
         organisms[i] = new Organism([3, 100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             random(canvasWidth), random(canvasHeight));
     }
+
 }
 
 // updates the environment
 function draw() {
     background(bg);
+
+    updateTable();
 
     while (nutrients.length < numFood) {
         nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues), flowerImages));
@@ -136,6 +89,7 @@ function draw() {
             strokeWeight(1);
         }
     }
+
 
     // debugging info
     showBestAgent();

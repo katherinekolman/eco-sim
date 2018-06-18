@@ -9,25 +9,54 @@ body {
 }
 
 canvas {
-    border-bottom: 5px solid #a2d183;
+    border-left: 5px solid #3f6b40;    /*#49635e; /*a2d183*/  /*738c4f*/
+}
+
+#info_box {
+    width: inherit;
+    height: 100%;
+    overflow: auto;
 }
 
 .container-fluid, .container {
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 2%;
+    /* align-items: center; */
 }
 
 #debug_info {
     background: #a2d183;
-    justify-content: center;
-    align-items: center;
     border: 3px solid #6a8956;
+    font-size: 15px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 35%;
 }
 
 .debug {
     justify-content: center;
     align-items: center;
+    padding: 10px;
+
+}
+
+#org_table {
+    border: 1px solid black;
+    overflow-y: auto;
+    height: 100%;
+    font-size: 17px;
+    align-self: center;
+}
+
+tr, th, td {
+    padding: 10px;
+    text-align: center;
+    border: 2px solid black;
+    background: #a2d183;
+}
+
+th {
+    background: #3f6b40;
+    color: white;
 }
