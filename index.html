@@ -18,18 +18,24 @@
 <body>
     <div class="container-fluid">
         <div id="info_box" class="col-4">
-            <div id="debug_info" class="row">
-                <div class="debug">
-                    <input id="best_agent" type="checkbox">
-                    <label for="best_agent">Best agent</label><br/>
+            <div id="top_row" class="row">
+                <div id="debug_info" class="col">
+                    <div class="debug">
+                        <input id="best_agent" type="checkbox">
+                        <label for="best_agent">Best agent</label><br/>
+                    </div>
+                    <div class="debug">
+                        <input id="food_attraction" type="checkbox">
+                        <label for="food_attraction">Food attraction</label><br/>
+                    </div>
+                    <div class="debug">
+                        <input id="food_radius" type="checkbox">
+                        <label for="food_radius">Food detection radius</label>
+                    </div>
                 </div>
-                <div class="debug">
-                    <input id="food_attraction" type="checkbox">
-                    <label for="food_attraction">Food attraction</label><br/>
-                </div>
-                <div class="debug">
-                    <input id="food_radius" type="checkbox">
-                    <label for="food_radius">Food detection radius</label>
+                <div id="slider_div" class="col">
+                    <p id="framerate" class="row">Framerate</p>
+                     <input type="range" min="1" max="60" value="1" id="slider" class="row">
                 </div>
             </div>
             <div class="row">

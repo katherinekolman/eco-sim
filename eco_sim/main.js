@@ -1,9 +1,10 @@
 var organisms = [];
+var herbivores = [];
 var nutrients = [];
 var rabbitFrames = [];
 var flowerImages = [];
-var numOrgs = 5;
-var numFood = 30;
+var numOrgs = 20;
+var numFood = 100;
 var canvasWidth = window.innerWidth;
 var canvasHeight = window.innerHeight;
 var bg;
@@ -43,7 +44,10 @@ function setup() {
     canvas = createCanvas(canvasWidth, canvasHeight, P2D);
     canvas.parent("sketch");
     loadImages();
-    frameRate(8);
+
+    fr = parseInt(document.getElementById("slider").value);
+    frameRate(fr);
+    document.getElementById("framerate").innerHTML = "Framerate: " + fr;
 
     foodValues = [-20, 3, 15];
     for (let i = 0; i < numFood; i++) {
@@ -62,6 +66,12 @@ function setup() {
 function draw() {
     background(bg);
 
+    if (parseInt(document.getElementById("slider").value) != fr) {
+        fr = parseInt(document.getElementById("slider").value);
+        frameRate(fr);
+        document.getElementById("framerate").innerHTML = "Framerate: " + fr;
+    }
+
     updateTable();
 
     while (nutrients.length < numFood) {
@@ -79,14 +89,12 @@ function draw() {
             organisms[i].keepInBounds(canvasWidth, canvasHeight);
             organisms[i].update();
         } else {
-            if (((organisms[i].fitness / showBestAgent()) + random(.1, .4)) >= .6) { // FIXME find different way of calculating this
-                organisms[i].mutate(organisms[i].dna);
-                organisms.push(new Organism(organisms[i].dna, organisms[i].position.x, organisms[i].position.y));
-            }
+            // if (((organisms[i].fitness / showBestAgent()) + random(.1, .4)) >= .6) { // FIXME find different way of calculating this
+            //     organisms[i].mutate(organisms[i].dna);
+            //     organisms.push(new Organism(organisms[i].dna, organisms[i].position.x, organisms[i].position.y));
+            // }
 
             organisms.splice(i, 1);
-            stroke(0);
-            strokeWeight(1);
         }
     }
 

@@ -12,10 +12,21 @@ canvas {
     border-left: 5px solid #3f6b40;    /*#49635e; /*a2d183*/  /*738c4f*/
 }
 
-#info_box {
-    width: inherit;
+.col-4 {
     height: 100%;
     overflow: auto;
+}
+
+#info_box {
+    width: inherit;
+    height: 800px;
+    overflow-y: scroll;
+}
+
+#slider_div {
+    justify-content: center;
+    align-items: center;
+    display: block;
 }
 
 .container-fluid, .container {
@@ -25,6 +36,7 @@ canvas {
     /* align-items: center; */
 }
 
+
 #debug_info {
     background: #a2d183;
     border: 3px solid #6a8956;
@@ -32,6 +44,11 @@ canvas {
     margin-top: 5%;
     margin-bottom: 5%;
     width: 35%;
+}
+
+#top_row {
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .debug {
