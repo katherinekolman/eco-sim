@@ -9,6 +9,7 @@ var canvasWidth = window.innerWidth;
 var canvasHeight = window.innerHeight;
 var bg;
 var num = 0;
+var animalModes = Object.freeze({"FOOD": 1, "MATE": 2});
 
 
 // adds a new agent to environment if user clicks
