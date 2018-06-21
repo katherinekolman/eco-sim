@@ -16,6 +16,7 @@ class Herbivore extends Organism {
 
     tryBreeding() {
         // needs to account fitness score, health, hunger?, randomness
+        
     }
 
     findMate() {
