@@ -4,18 +4,9 @@ class Herbivore extends Organism {
         this.mode = animalModes.FOOD;
     }
 
-    update() {
-        super();
-        if (this.hunger < 50 || this.health > 50) {
-            this.mode = animalModes.MATE;
-            findMate();
-        } else {
-            findFood();
-        }
-    }
-
     tryBreeding() {
         // needs to account fitness score, health, hunger?, randomness
+        if (1 / showBestAgent() == 1) {}
 
     }
 
@@ -29,7 +20,7 @@ class Herbivore extends Organism {
 
             if (d < 10) {
                 if (herbivores[i].mode == animalModes.MATE) {
-                    tryBreeding();
+                    this.tryBreeding();
                 }
             }
 
@@ -43,7 +34,18 @@ class Herbivore extends Organism {
             }
         }
 
-        seek(closest);
+        super.seek(closest);
+    }
+
+    update() {
+        super.update();
+        // if (this.hunger < 50 || this.health > 50) {
+        //     this.mode = animalModes.MATE;
+        //     this.findMate();
+        // } else {
+        //     this.mode = animalModes.FOOD;
+        //     super.findFood();
+        // }
     }
 
 }

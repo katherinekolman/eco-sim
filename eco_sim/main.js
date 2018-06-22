@@ -15,8 +15,10 @@ var animalModes = Object.freeze({"FOOD": 1, "MATE": 2});
 // adds a new agent to environment if user clicks
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        organisms.push(new Organism([3, 100, random(1, 2), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+        herbivores.push(new Herbivore([3, 100, random(1, 2), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             mouseX, mouseY));
+        organisms.push(herbivores[herbivores.length - 1]);
+
     }
 }
 
@@ -57,8 +59,9 @@ function setup() {
 
     // populate environment with random agents
     for (let i = 0; i < numOrgs; i++) {
-        organisms[i] = new Organism([3, 100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+        herbivores[i] = new Herbivore([3, 100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             random(canvasWidth), random(canvasHeight));
+        organisms.push(herbivores[i]);
     }
 
 }
@@ -83,18 +86,21 @@ function draw() {
         nutrients[i].display();
     }
 
-    for (let i = organisms.length - 1; i > -1; i--) {
+    for (let i = organisms.length - 1; i >= 0; i--) {
         if (organisms[i].health > 0) {
             organisms[i].display();
             organisms[i].findFood(nutrients);
             organisms[i].keepInBounds(canvasWidth, canvasHeight);
             organisms[i].update();
         } else {
-            // if (((organisms[i].fitness / showBestAgent()) + random(.1, .4)) >= .6) { // FIXME find different way of calculating this
-            //     organisms[i].mutate(organisms[i].dna);
-            //     organisms.push(new Organism(organisms[i].dna, organisms[i].position.x, organisms[i].position.y));
-            // }
-
+            if (organisms[i].constructor.name == "Herbivore") {
+                for (let j = herbivores.length - 1; j >= 0; j--) {
+                    if (herbivores[i] == organisms[i]) {
+                        herbivores.splice(j, 1);
+                        break;
+                    }
+                }
+            }
             organisms.splice(i, 1);
         }
     }
