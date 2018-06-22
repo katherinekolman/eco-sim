@@ -9,6 +9,8 @@
     <script language="javascript" type="text/javascript" src="eco_sim/infobox.js"></script>
     <script language="javascript" type="text/javascript" src="eco_sim/food.js"></script>
     <script language="javascript" type="text/javascript" src="eco_sim/organism.js"></script>
+    <script language="javascript" type="text/javascript" src="eco_sim/herbivore.js"></script>
+    <script language="javascript" type="text/javascript" src="eco_sim/carnivore.js"></script>
     <script language="javascript" type="text/javascript" src="eco_sim/main.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -30,13 +32,13 @@
                     </div>
                     <div class="debug">
                         <input id="food_radius" type="checkbox">
-                        <label for="food_radius">Food detection radius</label>
+                        <label for="food_radius">Perception radius</label>
                     </div>
                 </div>
-                <div id="slider_div" class="col">
-                    <p id="framerate" class="row">Framerate</p>
-                     <input type="range" min="1" max="60" value="1" id="slider" class="row">
-                </div>
+            </div>
+            <div id="slider_div" class="row">
+                <p id="framerate" class="col">Framerate</p>
+                 <input type="range" min="1" max="60" value="10" id="slider" class="col">
             </div>
             <div class="row">
                 <table id="org_table">
