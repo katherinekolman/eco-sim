@@ -1,7 +1,7 @@
 class Carnivore extends Organism {
 
-    constructor(x, y) {
-        super(x, y);
+    constructor(dna, x, y) {
+        super(dna, x, y);
     }
 
     seek(prey) {

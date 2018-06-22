@@ -1,6 +1,6 @@
 class Herbivore extends Organism {
-    constructor(x, y) {
-        super();
+    constructor(dna, x, y) {
+        super(dna, x, y);
         this.mode = animalModes.FOOD;
     }
 
@@ -16,7 +16,7 @@ class Herbivore extends Organism {
 
     tryBreeding() {
         // needs to account fitness score, health, hunger?, randomness
-        
+
     }
 
     findMate() {
