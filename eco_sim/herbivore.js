@@ -4,9 +4,15 @@ class Herbivore extends Organism {
         this.mode = animalModes.FOOD;
     }
 
-    tryBreeding() {
+    crossover(mateDNA) {
+        // performs the genetic mutations and crossover for the new organism
+    }
+
+    tryBreeding(mateDNA) {
         // needs to account fitness score, health, hunger?, randomness
-        if (1 / showBestAgent() == 1) {}
+        if (((this.fitness / showBestAgent()) * (this.health / 100) * random(.3, .8)) >= .2) {
+            herbivores.push(new Herbivore(crossover(mateDNA), this.x, this.y));
+        }
 
     }
 
@@ -20,7 +26,7 @@ class Herbivore extends Organism {
 
             if (d < 10) {
                 if (herbivores[i].mode == animalModes.MATE) {
-                    this.tryBreeding();
+                    this.tryBreeding(herbivores[i].dna);
                 }
             }
 

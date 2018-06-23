@@ -48,7 +48,7 @@ class Organism {
     }
 
     // displays the location of the agent
-    display() { // triangle shaped
+    display() {
         let frame;
         let heading = this.velocity.heading()
         if (heading > -0.75 && heading < 0.75) { // left
