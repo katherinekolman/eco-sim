@@ -13,7 +13,6 @@ class Herbivore extends Organism {
         if (((this.fitness / showBestAgent()) * (this.health / 100) * random(.3, .8)) >= .2) {
             herbivores.push(new Herbivore(crossover(mateDNA), this.x, this.y));
         }
-
     }
 
     findMate() {
@@ -31,7 +30,7 @@ class Herbivore extends Organism {
             }
 
             if (d > this.perceptionRadius) {
-                continue
+                continue;
             }
 
             if (d < distance) {
