@@ -6,6 +6,17 @@ class Herbivore extends Organism {
 
     crossover(mateDNA) {
         // performs the genetic mutations and crossover for the new organism
+        // randomly choose which dna trait to pick from each parent
+        childDNA = [];
+        for (let i = 0; i < mateDNA.length; i++) {
+            if (random() > .5) {
+                childDNA.push(this.dna[i]);
+            }
+            else {
+                childDNA.push(mateDNA[i]);
+            }
+        }
+        herbivores.push(new Herbivore(childDNA, this.x, this.y));
     }
 
     tryBreeding(mateDNA) {
