@@ -7,7 +7,7 @@ class Herbivore extends Organism {
     crossover(mateDNA) {
         // performs the genetic mutations and crossover for the new organism
         // randomly choose which dna trait to pick from each parent
-        childDNA = [];
+        let childDNA = [];
         for (let i = 0; i < mateDNA.length; i++) {
             if (random() > .5) {
                 childDNA.push(this.dna[i]);
@@ -16,13 +16,13 @@ class Herbivore extends Organism {
                 childDNA.push(mateDNA[i]);
             }
         }
-        herbivores.push(new Herbivore(childDNA, this.x, this.y));
+        return childDNA;
     }
 
     tryBreeding(mateDNA) {
         // needs to account fitness score, health, hunger?, randomness
         if (((this.fitness / showBestAgent()) * (this.health / 100) * random(.3, .8)) >= .2) {
-            herbivores.push(new Herbivore(crossover(mateDNA), this.x, this.y));
+            herbivores.push(new Herbivore(this.crossover(mateDNA), this.x, this.y));
         }
     }
 
@@ -46,22 +46,21 @@ class Herbivore extends Organism {
 
             if (d < distance) {
                 distance = d;
-                closest = organisms[i];
+                closest = herbivores[i];
             }
         }
-
         super.seek(closest);
     }
 
     update() {
         super.update();
-        // if (this.hunger < 50 || this.health > 50) {
-        //     this.mode = animalModes.MATE;
-        //     this.findMate();
-        // } else {
-        //     this.mode = animalModes.FOOD;
-        //     super.findFood();
-        // }
+        if (this.hunger < 50) {
+            this.mode = animalModes.MATE;
+            this.findMate();
+        } else {
+            this.mode = animalModes.FOOD;
+            super.findFood();
+        }
     }
 
 }
