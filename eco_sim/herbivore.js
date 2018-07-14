@@ -20,9 +20,10 @@ class Herbivore extends Organism {
     }
 
     tryBreeding(mateDNA) {
-        // needs to account fitness score, health, hunger?, randomness
+        // needs to account fitness score, health,  randomness
         if (((this.fitness / showBestAgent()) * (this.health / 100) * random(.3, .8)) >= .2) {
             herbivores.push(new Herbivore(this.crossover(mateDNA), this.x, this.y));
+
         }
     }
 
@@ -54,13 +55,13 @@ class Herbivore extends Organism {
 
     update() {
         super.update();
-        if (this.hunger < 50) {
-            this.mode = animalModes.MATE;
-            this.findMate();
-        } else {
+            //  if (this.hunger < 50 || this.health < 50) {
+            //      this.mode = animalModes.MATE;
+            //      this.findMate();
+            //  } else {
             this.mode = animalModes.FOOD;
             super.findFood();
-        }
+                    //  }
     }
 
 }
