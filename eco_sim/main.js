@@ -4,7 +4,7 @@ var carnivores = [];
 var nutrients = [];
 var rabbitFrames = [];
 var flowerImages = [];
-var numOrgs = 20;
+var numOrgs = 2;
 var numFood = 100;
 var canvasWidth = window.innerWidth;
 var canvasHeight = window.innerHeight;
@@ -19,7 +19,7 @@ var animalModes = Object.freeze({
 // adds a new agent to environment if user clicks
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        herbivores.push(new Herbivore([3, 100, random(1, 2), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+        herbivores.push(new Herbivore([100, random(1, 2), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             mouseX, mouseY));
         organisms.push(herbivores[herbivores.length - 1]);
     }
@@ -62,7 +62,7 @@ function setup() {
 
     // populate environment with random agents
     for (let i = 0; i < numOrgs; i++) {
-        herbivores[i] = new Herbivore([3, 100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+        herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             random(canvasWidth), random(canvasHeight));
         organisms.push(herbivores[i]);
     }
@@ -100,7 +100,6 @@ function draw() {
                 for (let j = herbivores.length - 1; j >= 0; j--) {
                     if (herbivores[i] == organisms[i]) {
                         herbivores.splice(j, 1);
-                        break;
                     }
                 }
             }
@@ -108,12 +107,19 @@ function draw() {
                 for (let j = carnivores.length - 1; j >= 0; j--) {
                     if (carnivores[i] == organisms[i]) {
                         carnivores.splice(j, 1);
-                        break;
                     }
                 }
             }
             organisms.splice(i, 1);
         }
+    }
+
+    if (organisms.length == 0) {
+      for (let i = 0; i < numOrgs; i++) {
+          herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+              random(canvasWidth), random(canvasHeight));
+          organisms.push(herbivores[i]);
+      }
     }
 
     // debugging info
@@ -124,5 +130,4 @@ function draw() {
     if (document.getElementById("food_attraction").checked) {
         showFoodAttraction();
     }
-
 }

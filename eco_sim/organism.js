@@ -15,17 +15,17 @@ class Organism {
         // for graphics
         this.frameCounter = 0;
 
+        // organism ID number (for cell in infobox table)
         this.num = num;
         num++;
 
-        // dna values
+        // dna
         this.dna = dna;
-        this.size = dna[0];
-        this.health = dna[1];
-        this.maxVelocity = dna[2];
-        this.foodAttraction = dna[3];
-        this.perceptionRadius = dna[4];
-        this.animal = dna[5];
+        this.health = dna[0];
+        this.maxVelocity = dna[1];
+        this.foodAttraction = dna[2];
+        this.perceptionRadius = dna[3];
+        this.animal = dna[4];
     }
 
     // updates the physics and health of the agent
@@ -160,16 +160,13 @@ class Organism {
             if (random(1) > .9) {
                 switch (i) {
                     case 0:
-                        dna[i] += random(-.3, .3);
-                        break;
-                    case 1:
                         dna[i] += random(-3, 3);
                         break;
-                    case 2:
-                    case 4:
+                    case 1:
+                    case 3:
                         dna[i] += random(-.1, .1);
                         break;
-                    case 3:
+                    case 2:
                         dna[i][0] += random(-.3, .3);
                         if (dna[i][0] > 20) {
                             dna[i][0] = 20;
