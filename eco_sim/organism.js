@@ -183,4 +183,59 @@ class Organism {
             }
         }
     }
+
+    tryBreeding(animals, mateDNA) {
+        // needs to account fitness score, health,  randomness
+        let threshold = ((this.fitness / showBestAgent()) * (this.health / 100) * random(.3, .8));
+
+        if (threshold >= .78) {
+
+            if (animals[0].constructor.name == "Herbivore") {
+                animals.push(new Herbivore(this.crossover(mateDNA), this.position.x, this.position.y));
+                organisms.push(herbivores[herbivores.length - 1]);
+            }
+            if (animals[0].constructor.name == "Carnivore") {
+                animals.push(new Carnivore(this.crossover(mateDNA), this.position.x, this.position.y));
+                organisms.push(carnivores[carnivores.length - 1]);
+            }
+        }
+    }
+
+    findMate(animals) {
+        let distance = Infinity;
+        let d;
+        let closest = null;
+
+        for (let i = 0; i < animals.length; i++) {
+            // can't breed with itself
+            if (animals[i].num == this.num) {
+              continue;
+            }
+
+            d = animals[i].position.dist(this.position);
+
+            if (d < 10) {
+                if (animals[i].mode == animalModes.MATE) {
+                    this.tryBreeding(animals, animals[i].dna);
+                }
+            }
+
+            if (d > this.perceptionRadius) {
+                continue;
+            }
+
+            if (d < distance) {
+                distance = d;
+                closest = animals[i];
+            }
+        }
+
+        // if there aren't any eligible mates nearby, find food instead
+        if (closest == null) {
+          this.findFood();
+          return;
+        }
+
+        this.seek(closest);
+    }
 }

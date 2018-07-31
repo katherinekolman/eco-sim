@@ -115,11 +115,11 @@ function draw() {
     }
 
     if (organisms.length == 0) {
-      for (let i = 0; i < numOrgs; i++) {
-          herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
-              random(canvasWidth), random(canvasHeight));
-          organisms.push(herbivores[i]);
-      }
+        for (let i = 0; i < numOrgs; i++) {
+            herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+                random(canvasWidth), random(canvasHeight));
+            organisms.push(herbivores[i]);
+        }
     }
 
     // debugging info
