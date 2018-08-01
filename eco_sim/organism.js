@@ -19,6 +19,9 @@ class Organism {
         this.num = num;
         num++;
 
+        // default mode
+        this.mode = animalModes.FOOD;
+
         // dna
         this.dna = dna;
         this.health = dna[0];
