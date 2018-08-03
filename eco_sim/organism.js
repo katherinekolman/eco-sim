@@ -68,61 +68,6 @@ class Organism {
         this.frameCounter++;
     }
 
-    // finds the closest food and updates health
-    findFood() {
-        let food = null;
-        let pull = -Infinity;
-        let d; // distance
-        let p; // calculated attraction to food
-        let type; // type of food
-
-        for (let i = 0; i < nutrients.length; i++) {
-            d = nutrients[i].position.dist(this.position);
-
-            if (d < 5) { // if it finds food
-                this.health += nutrients[i].nutrition;
-                this.hunger -= 25;
-                if (this.health > 100) {
-                    this.health = 100;
-                }
-                if (this.hunger < 0) {
-                    this.hunger = 0;
-                }
-
-                nutrients.splice(i, 1);
-                return;
-            }
-
-            if (d > this.perceptionRadius) {
-                continue;
-            }
-
-            switch (nutrients[i].nutrition) {
-                case -20:
-                    type = 0;
-                    break;
-                case 15:
-                    type = 2;
-                    break;
-                case 3:
-                default:
-                    type = 1;
-                    break;
-            }
-
-            p = (1 / d) * this.foodAttraction[type];
-
-            if (p > pull) {
-                pull = p;
-                food = nutrients[i];
-            }
-        }
-
-        if (food == null) {
-            return;
-        }
-        this.seek(food);
-    }
 
     // physics for seeking the desired food object
     seek(closest) {
@@ -189,9 +134,9 @@ class Organism {
 
     tryBreeding(animals, mateDNA) {
         // needs to account fitness score, health,  randomness
-        let threshold = ((this.fitness / showBestAgent()) * (this.health / 100) * random(.3, .8));
+        let threshold = ((this.fitness / showBestAgent(animals)) * (this.health / 100) * random(.3, .8));
 
-        if (threshold >= .78) {
+        if (threshold >= .79) {
 
             if (animals[0].constructor.name == "Herbivore") {
                 animals.push(new Herbivore(this.crossover(mateDNA), this.position.x, this.position.y));
@@ -202,6 +147,25 @@ class Organism {
                 organisms.push(carnivores[carnivores.length - 1]);
             }
         }
+    }
+
+    crossover(mateDNA) {
+        // performs the genetic mutations and crossover for the new organism
+        // randomly choose which dna trait to pick from each parent
+        let childDNA = [];
+        for (let i = 0; i < mateDNA.length; i++) {
+            if (random() > .5) {
+                childDNA.push(this.dna[i]);
+            } else {
+                childDNA.push(mateDNA[i]);
+            }
+        }
+
+        return childDNA;
+    }
+
+    findFood(food) {
+        // should be overriden by subclasses
     }
 
     findMate(animals) {
@@ -235,7 +199,7 @@ class Organism {
 
         // if there aren't any eligible mates nearby, find food instead
         if (closest == null) {
-          this.findFood();
+          this.findFood(nutrients);
           return;
         }
 
