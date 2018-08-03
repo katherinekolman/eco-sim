@@ -23,11 +23,11 @@ function updateTable() {
 
 
 // locates the agent with the highest fitness score
-function showBestAgent() {
-    bestAgent = organisms[0];
-    for (let i = 0; i < organisms.length; i++) {
-        if (organisms[i].fitness > bestAgent.fitness) {
-            bestAgent = organisms[i];
+function showBestAgent(animalType) {
+    bestAgent = animalType[0];
+    for (let i = 0; i < animalType.length; i++) {
+        if (animalType[i].fitness > bestAgent.fitness) {
+            bestAgent = animalType[i];
         }
     }
 
