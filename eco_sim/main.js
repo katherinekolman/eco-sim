@@ -3,6 +3,7 @@ var herbivores = [];
 var carnivores = [];
 var nutrients = [];
 var rabbitFrames = [];
+var foxFrames = [];
 var flowerImages = [];
 var numOrgs = 20;
 var numFood = 100;
@@ -40,6 +41,23 @@ function loadImages() {
     rabbitFrames.push(loadImage("eco_sim/images/rabbitf1.png"));
     rabbitFrames.push(loadImage("eco_sim/images/rabbitf3.png"));
 
+    foxFrames.push(loadImage("eco_sim/images/foxb1.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxb2.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxb3.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxb2.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxl1.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxl2.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxl3.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxl2.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxr1.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxr2.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxr3.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxr2.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxf1.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxf2.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxf3.png"));
+    foxFrames.push(loadImage("eco_sim/images/foxf2.png"));
+
     flowerImages.push(loadImage("eco_sim/images/blueflower.png"));
     flowerImages.push(loadImage("eco_sim/images/redflower.png"));
     flowerImages.push(loadImage("eco_sim/images/purpleflower.png"));
@@ -64,7 +82,10 @@ function setup() {
     for (let i = 0; i < numOrgs; i++) {
         herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             random(canvasWidth), random(canvasHeight));
+        carnivores[i] = new Carnivore([100, random(3, 5), random(10), random(window.innerHeight * 0.05, window.innerHeight * 0.2), foxFrames],
+            random(canvasWidth), random(canvasHeight));
         organisms.push(herbivores[i]);
+        organisms.push(carnivores[i]);
     }
 
 }
@@ -115,15 +136,11 @@ function draw() {
     }
 
     if (organisms.length == 0) {
-        for (let i = 0; i < numOrgs; i++) {
-            herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
-                random(canvasWidth), random(canvasHeight));
-            organisms.push(herbivores[i]);
-        }
+        return;
     }
 
     // debugging info
-    showBestAgent();
+    showBestAgent(organisms);
     if (document.getElementById("food_radius").checked) {
         showPerceptionRadius();
     }
