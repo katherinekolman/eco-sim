@@ -176,7 +176,7 @@ class Organism {
         for (let i = 0; i < animals.length; i++) {
             // can't breed with itself
             if (animals[i].num == this.num) {
-              continue;
+                continue;
             }
 
             d = animals[i].position.dist(this.position);
@@ -199,8 +199,8 @@ class Organism {
 
         // if there aren't any eligible mates nearby, find food instead
         if (closest == null) {
-          this.findFood(nutrients);
-          return;
+            this.findFood(nutrients);
+            return;
         }
 
         this.seek(closest);

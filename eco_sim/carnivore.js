@@ -72,11 +72,11 @@ class Carnivore extends Organism {
 
         //should only mate when they're healthy
         if (this.hunger < 50 && this.health > 50) {
-             this.mode = animalModes.MATE;
-             this.findMate(carnivores);
+            this.mode = animalModes.MATE;
+            this.findMate(carnivores);
         } else {
-          this.mode = animalModes.FOOD;
-          this.findFood(herbivores);
+            this.mode = animalModes.FOOD;
+            this.findFood(herbivores);
         }
     }
 
