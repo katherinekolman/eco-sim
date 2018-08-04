@@ -81,7 +81,7 @@ class Herbivore extends Organism {
             this.findMate(herbivores);
         } else {
             this.mode = animalModes.FOOD;
-            super.findFood(nutrients);
+            this.findFood(nutrients);
         }
     }
 }
