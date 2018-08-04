@@ -5,7 +5,7 @@ var nutrients = [];
 var rabbitFrames = [];
 var foxFrames = [];
 var flowerImages = [];
-var numOrgs = 20;
+var numOrgs = 10;
 var numFood = 100;
 var canvasWidth = window.innerWidth;
 var canvasHeight = window.innerHeight;
@@ -122,7 +122,6 @@ function draw() {
                         herbivores.splice(j, 1);
                     }
                 }
-                continue;
             }
             if (organisms[i].constructor.name == "Carnivore") {
                 for (let j = carnivores.length - 1; j >= 0; j--) {
