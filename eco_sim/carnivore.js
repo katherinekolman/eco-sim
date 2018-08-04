@@ -53,6 +53,12 @@ class Carnivore extends Organism {
                 if (this.tryHunting(prey[i])) {
                     this.health += 30;
                     this.hunger -= 40;
+                    if (this.health > 100) {
+                        this.health = 100;
+                    }
+                    if (this.hunger < 0) {
+                        this.hunger = 0;
+                    }
                     for (let j = organisms.length - 1; j >= 0; j--) {
                         if (prey[i] == organisms[j]) {
                             organisms.splice(j, 1);
