@@ -113,7 +113,6 @@ function draw() {
     for (let i = organisms.length - 1; i >= 0; i--) {
         if (organisms[i].health > 0) {
             organisms[i].display();
-            organisms[i].findFood(nutrients);
             organisms[i].keepInBounds(canvasWidth, canvasHeight);
             organisms[i].update();
         } else {
@@ -123,6 +122,7 @@ function draw() {
                         herbivores.splice(j, 1);
                     }
                 }
+                continue;
             }
             if (organisms[i].constructor.name == "Carnivore") {
                 for (let j = carnivores.length - 1; j >= 0; j--) {

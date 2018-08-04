@@ -12,6 +12,18 @@ class Carnivore extends Organism {
         return random(1) < 0.1;
     }
 
+    findMate(animals) {
+        let closest = super.findMate(animals);
+
+        // if there aren't any eligible mates nearby, find food instead
+        if (closest == null) {
+            this.findFood(herbivores);
+            return;
+        }
+
+        this.seek(closest);
+    }
+
     display() {
         let frame;
         let heading = this.velocity.heading()

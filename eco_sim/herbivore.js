@@ -59,6 +59,18 @@ class Herbivore extends Organism {
         this.seek(closest);
     }
 
+    findMate(animals) {
+        let closest = super.findMate(animals);
+
+        // if there aren't any eligible mates nearby, find food instead
+        if (closest == null) {
+            this.findFood(nutrients);
+            return;
+        }
+
+        this.seek(closest);
+    }
+
 
     update() {
         super.update();

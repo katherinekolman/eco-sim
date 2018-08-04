@@ -164,9 +164,9 @@ class Organism {
         return childDNA;
     }
 
-    findFood(food) {
-        // should be overriden by subclasses
-    }
+    // findFood(food) {
+    //     // should be overriden by subclasses
+    // }
 
     findMate(animals) {
         let distance = Infinity;
@@ -196,13 +196,6 @@ class Organism {
                 closest = animals[i];
             }
         }
-
-        // if there aren't any eligible mates nearby, find food instead
-        if (closest == null) {
-            this.findFood(nutrients);
-            return;
-        }
-
-        this.seek(closest);
+        return closest;
     }
 }
