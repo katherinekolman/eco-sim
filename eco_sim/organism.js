@@ -68,7 +68,6 @@ class Organism {
         this.frameCounter++;
     }
 
-
     // physics for seeking the desired food object
     seek(closest) {
         let target = p5.Vector.sub(closest.position, this.position);
@@ -102,42 +101,12 @@ class Organism {
         }
     }
 
-    // slightly alters dna values after death
-    mutate(dna) {
-        for (let i = 0; i < dna.length; i++) {
-            if (random(1) > .9) {
-                switch (i) {
-                    case 0:
-                        dna[i] += random(-3, 3);
-                        break;
-                    case 1:
-                    case 3:
-                        dna[i] += random(-.1, .1);
-                        break;
-                    case 2:
-                        dna[i][0] += random(-.3, .3);
-                        if (dna[i][0] > 20) {
-                            dna[i][0] = 20;
-                        }
-                        if (dna[i][0] < -20) {
-                            dna[i][0] = -20;
-                        }
-                        dna[i][1] += random(-.3, .3);
-                        break;
-                    default:
-                        continue
-                        break;
-                }
-            }
-        }
-    }
-
+    // attempt to produce a new organism
     tryBreeding(animals, mateDNA) {
         // needs to account fitness score, health,  randomness
         let threshold = ((this.fitness / showBestAgent(animals)) * (this.health / 100) * random(.3, .8));
 
         if (threshold >= .79) {
-
             if (animals[0].constructor.name == "Herbivore") {
                 animals.push(new Herbivore(this.crossover(mateDNA), this.position.x, this.position.y));
                 organisms.push(herbivores[herbivores.length - 1]);
@@ -149,8 +118,9 @@ class Organism {
         }
     }
 
+    // randomizes child DNA between the two parents' DNA
     crossover(mateDNA) {
-        // performs the genetic mutations and crossover for the new organism
+        // performs the genetic crossover for the new organism
         // randomly choose which dna trait to pick from each parent
         let childDNA = [];
         for (let i = 0; i < mateDNA.length; i++) {
@@ -163,10 +133,6 @@ class Organism {
 
         return childDNA;
     }
-
-    // findFood(food) {
-    //     // should be overriden by subclasses
-    // }
 
     findMate(animals) {
         let distance = Infinity;

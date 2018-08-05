@@ -1,32 +1,33 @@
+// This is the main file for the simulation. It handles the setup + drawing of
+// the scene and general organism logic.
+
+// organism arrays
 var organisms = [];
 var herbivores = [];
 var carnivores = [];
 var nutrients = [];
+
+// sprite images
 var rabbitFrames = [];
 var foxFrames = [];
 var flowerImages = [];
-var numOrgs = 10;
-var numFood = 100;
+
+// window information
 var canvasWidth = window.innerWidth;
 var canvasHeight = window.innerHeight;
 var bg;
-var num = 0;
+
+// animal information
+var numOrgs = 20;
+var numFood = 100;
+var num = 0;  // unique organism ID
 var animalModes = Object.freeze({
     "FOOD": 1,
     "MATE": 2
 });
 
 
-// adds a new agent to environment if user clicks
-function mousePressed() {
-    if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
-        herbivores.push(new Herbivore([100, random(1, 2), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
-            mouseX, mouseY));
-        organisms.push(herbivores[herbivores.length - 1]);
-    }
-}
-
-// loads all the necessary images into their respective arrays
+// loads all the animal/food sprites
 function loadImages() {
     rabbitFrames.push(loadImage("eco_sim/images/rabbitb2.png"));
     rabbitFrames.push(loadImage("eco_sim/images/rabbitb1.png"));
@@ -63,6 +64,7 @@ function loadImages() {
     flowerImages.push(loadImage("eco_sim/images/purpleflower.png"));
 }
 
+// sets up the environment
 function setup() {
     bg = loadImage("eco_sim/images/grass20.png");
     canvas = createCanvas(canvasWidth, canvasHeight, P2D);
@@ -75,14 +77,17 @@ function setup() {
 
     foodValues = [-20, 3, 15];
     for (let i = 0; i < numFood; i++) {
-        nutrients[i] = new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues), flowerImages);
+        nutrients[i] = new Food(random(canvasWidth - 10), random(canvasHeight - 10),
+            random(foodValues), flowerImages);
     }
 
     // populate environment with random agents
     for (let i = 0; i < numOrgs; i++) {
-        herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)], random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+        herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)],
+            random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
             random(canvasWidth), random(canvasHeight));
-        carnivores[i] = new Carnivore([100, random(3, 5), random(10), random(window.innerHeight * 0.05, window.innerHeight * 0.2), foxFrames],
+        carnivores[i] = new Carnivore([100, random(4, 6), [5, 5, 5],
+            random(window.innerHeight * 0.05, window.innerHeight * 0.2), foxFrames],
             random(canvasWidth), random(canvasHeight));
         organisms.push(herbivores[i]);
         organisms.push(carnivores[i]);
@@ -103,7 +108,8 @@ function draw() {
     updateTable();
 
     while (nutrients.length < numFood) {
-        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10), random(foodValues), flowerImages));
+        nutrients.push(new Food(random(canvasWidth - 10), random(canvasHeight - 10),
+            random(foodValues), flowerImages));
     }
 
     for (let i = 0; i < nutrients.length; i++) {
@@ -145,5 +151,15 @@ function draw() {
     }
     if (document.getElementById("food_attraction").checked) {
         showFoodAttraction();
+    }
+}
+
+// adds a new herbivore to environment if the user clicks
+function mousePressed() {
+    if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
+        herbivores.push(new Herbivore([100, random(1, 2), [random(10), random(10), random(10)],
+            random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+            mouseX, mouseY));
+        organisms.push(herbivores[herbivores.length - 1]);
     }
 }
