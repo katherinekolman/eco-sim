@@ -24,6 +24,36 @@ class Carnivore extends Organism {
         this.seek(closest);
     }
 
+    // slightly alters dna values for new child
+    mutate(dna) {
+        for (let i = 0; i < dna.length; i++) {
+            if (random(1) > .9) {
+                switch (i) {
+                    case 0:
+                        dna[i] += random(-3, 3);
+                        break;
+                    case 1:
+                    case 3:
+                        dna[i] += random(-.1, .1);
+                        break;
+                    case 2:
+                        dna[i][0] += random(-.3, .3);
+                        if (dna[i][0] > 20) {
+                            dna[i][0] = 20;
+                        }
+                        if (dna[i][0] < -20) {
+                            dna[i][0] = -20;
+                        }
+                        dna[i][1] += random(-.3, .3);
+                        break;
+                    default:
+                        continue;
+                        break;
+                }
+            }
+        }
+    }
+
     display() {
         let frame;
         let heading = this.velocity.heading()

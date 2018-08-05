@@ -1,6 +1,6 @@
 class Herbivore extends Organism {
     constructor(dna, x, y) {
-        super(dna, x, y);
+        super(this.mutate(dna), x, y);
     }
 
     // finds the nearest plant to eat
@@ -59,6 +59,7 @@ class Herbivore extends Organism {
         this.seek(closest);
     }
 
+    // looks for nearby organism of same species to breed with
     findMate(animals) {
         let closest = super.findMate(animals);
 
@@ -71,7 +72,38 @@ class Herbivore extends Organism {
         this.seek(closest);
     }
 
+    // slightly alters dna values for new child
+    mutate(dna) {
+        for (let i = 0; i < dna.length; i++) {
+            if (random(1) > .9) {
+                switch (i) {
+                    case 0:
+                        dna[i] += random(-3, 3);
+                        break;
+                    case 1:
+                        dna[i] += random(-.1, .1);
+                        break;
+                    case 2:
+                        dna[i][0] += random(-.3, .3);
+                        if (dna[i][0] > 10) {
+                            dna[i][0] = 10;
+                        }
+                        if (dna[i][0] < -10) {
+                            dna[i][0] = -10;
+                        }
+                        dna[i][1] += random(-.3, .3);
+                        break;
+                    case 3:
+                        dna[i] += random(-10, 10);
+                    default:
+                        continue
+                        break;
+                }
+            }
+        }
+    }
 
+    // updates state of organism
     update() {
         super.update();
 
