@@ -150,6 +150,7 @@ class Organism {
             if (d < 10) {
                 if (animals[i].mode == animalModes.MATE) {
                     this.tryBreeding(animals, animals[i].dna);
+                    break;
                 }
             }
 

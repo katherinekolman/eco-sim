@@ -1,7 +1,7 @@
 class Herbivore extends Organism {
     constructor(dna, x, y) {
         super(dna, x, y);
-        this.dna = this.mutate(dna);
+        this.mutate(dna);
     }
 
     // finds the nearest plant to eat
