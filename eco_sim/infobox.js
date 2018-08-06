@@ -65,7 +65,11 @@ function showFoodAttraction() {
         let angle = organisms[i].velocity.heading() - PI / 2;
 
         push();
-        translate(organisms[i].position.x + 15, organisms[i].position.y + 15);
+        if (organisms[i].constructor.name == "Herbivore") {
+            translate(organisms[i].position.x + 15, organisms[i].position.y + 15);
+        } else {
+            translate(organisms[i].position.x + 25, organisms[i].position.y + 25);
+        }
         rotate(angle);
         line(0, 0, 0, organisms[i].foodAttraction[0] * 10); // attraction to most nutritious food
         stroke(map(organisms[i].foodAttraction[1], 0, 10, 255, 0), map(organisms[i].foodAttraction[1], 0, 10, 0, 255), 0);
