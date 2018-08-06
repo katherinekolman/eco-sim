@@ -4,6 +4,7 @@ class Carnivore extends Organism {
 
     constructor(dna, x, y) {
         super(dna, x, y);
+        this.dna = this.mutate(dna);
     }
 
     tryHunting(prey) {
@@ -35,16 +36,6 @@ class Carnivore extends Organism {
                     case 1:
                     case 3:
                         dna[i] += random(-.1, .1);
-                        break;
-                    case 2:
-                        dna[i][0] += random(-.3, .3);
-                        if (dna[i][0] > 20) {
-                            dna[i][0] = 20;
-                        }
-                        if (dna[i][0] < -20) {
-                            dna[i][0] = -20;
-                        }
-                        dna[i][1] += random(-.3, .3);
                         break;
                     default:
                         continue;
