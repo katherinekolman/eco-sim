@@ -20,7 +20,7 @@ var bg;
 // animal information
 var numOrgs = 20;
 var numFood = 100;
-var num = 0;  // unique organism ID
+var num = 0; // unique organism ID
 var animalModes = Object.freeze({
     "FOOD": 1,
     "MATE": 2
@@ -83,11 +83,18 @@ function setup() {
 
     // populate environment with random agents
     for (let i = 0; i < numOrgs; i++) {
+        // twice as many herbivores as carnivores to start
         herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)],
-            random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+                random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames
+            ],
+            random(canvasWidth), random(canvasHeight));
+        herbivores[i] = new Herbivore([100, random(3, 5), [random(10), random(10), random(10)],
+                random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames
+            ],
             random(canvasWidth), random(canvasHeight));
         carnivores[i] = new Carnivore([100, random(4, 6), [5, 5, 5],
-            random(window.innerHeight * 0.05, window.innerHeight * 0.2), foxFrames],
+                random(window.innerHeight * 0.05, window.innerHeight * 0.2), foxFrames
+            ],
             random(canvasWidth), random(canvasHeight));
         organisms.push(herbivores[i]);
         organisms.push(carnivores[i]);
@@ -145,7 +152,9 @@ function draw() {
     }
 
     // debugging info
-    showBestAgent(organisms);
+    if (document.getElementById("best_agent").checked) {
+        showBestAgent(organisms);
+    }
     if (document.getElementById("food_radius").checked) {
         showPerceptionRadius();
     }
@@ -158,8 +167,8 @@ function draw() {
 function mousePressed() {
     if (mouseX > 0 && mouseX < canvasWidth && mouseY > 0 && mouseY < canvasHeight) {
         herbivores.push(new Herbivore([100, random(1, 2), [random(10), random(10), random(10)],
-            random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
-            mouseX, mouseY));
+                random(window.innerHeight * 0.05, window.innerHeight * 0.2), rabbitFrames],
+                mouseX, mouseY));
         organisms.push(herbivores[herbivores.length - 1]);
     }
 }

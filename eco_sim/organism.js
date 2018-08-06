@@ -101,6 +101,38 @@ class Organism {
         }
     }
 
+    // finds nearby potential mates
+    findMate(animals) {
+        let distance = Infinity;
+        let d;
+        let closest = null;
+
+        for (let i = 0; i < animals.length; i++) {
+            // can't breed with itself
+            if (animals[i].num == this.num) {
+                continue;
+            }
+
+            d = animals[i].position.dist(this.position);
+
+            if (d < 10) {
+                if (animals[i].mode == animalModes.MATE) {
+                    this.tryBreeding(animals, animals[i].dna);
+                }
+            }
+
+            if (d > this.perceptionRadius) {
+                continue;
+            }
+
+            if (d < distance) {
+                distance = d;
+                closest = animals[i];
+            }
+        }
+        return closest;
+    }
+
     // attempt to produce a new organism
     tryBreeding(animals, mateDNA) {
         // needs to account fitness score, health,  randomness
@@ -132,37 +164,5 @@ class Organism {
         }
 
         return childDNA;
-    }
-
-    findMate(animals) {
-        let distance = Infinity;
-        let d;
-        let closest = null;
-
-        for (let i = 0; i < animals.length; i++) {
-            // can't breed with itself
-            if (animals[i].num == this.num) {
-                continue;
-            }
-
-            d = animals[i].position.dist(this.position);
-
-            if (d < 10) {
-                if (animals[i].mode == animalModes.MATE) {
-                    this.tryBreeding(animals, animals[i].dna);
-                    break;
-                }
-            }
-
-            if (d > this.perceptionRadius) {
-                continue;
-            }
-
-            if (d < distance) {
-                distance = d;
-                closest = animals[i];
-            }
-        }
-        return closest;
     }
 }

@@ -1,5 +1,6 @@
 // This file contains everything in the information box to the left of the simulation
 
+// updates the organism table with current values
 function updateTable() {
     let table = document.getElementById("org_table");
 
@@ -22,19 +23,22 @@ function updateTable() {
 }
 
 
-// locates the agent with the highest fitness score
+// displays the agent with the highest fitness score
 function showBestAgent(animalType) {
     let bestAgent = getBestAgent(animalType);
 
-    if (document.getElementById("best_agent").checked) {
-        noFill();
-        stroke(255, 0, 0);
-        strokeWeight(3);
-        ellipse(bestAgent.position.x + 15, bestAgent.position.y + 15, 50, 50);
-    }
+    noFill();
+    stroke(255, 0, 0);
+    strokeWeight(3);
+    ellipse(bestAgent.position.x + 15, bestAgent.position.y + 15, 50, 50);
+
 }
 
+// displays the agent with the highest fitness score
 function getBestAgent(animalType) {
+    if (animalType.length < 1) {
+        return null;
+    }
     let bestAgent = animalType[0];
     for (let i = 0; i < animalType.length; i++) {
         if (animalType[i].fitness > bestAgent.fitness) {

@@ -1,50 +1,24 @@
 class Carnivore extends Organism {
-
-    // need to overwrite mutate, findFood
-
     constructor(dna, x, y) {
         super(dna, x, y);
         this.mutate(dna);
     }
 
-    tryHunting(prey) {
-        // should be based on predator + prey health, speed
-        let threshold = ((this.health / getBestAgent(carnivores).health));
-        return random(1) < 0.1;
-    }
+    // updates state of organism
+    update() {
+        super.update();
 
-    findMate(animals) {
-        let closest = super.findMate(animals);
-
-        // if there aren't any eligible mates nearby, find food instead
-        if (closest == null) {
+        //should only mate when they're healthy
+        if (this.hunger < 50 && this.health > 50) {
+            this.mode = animalModes.MATE;
+            this.findMate(carnivores);
+        } else {
+            this.mode = animalModes.FOOD;
             this.findFood(herbivores);
-            return;
-        }
-
-        this.seek(closest);
-    }
-
-    // slightly alters dna values for new child
-    mutate(dna) {
-        for (let i = 0; i < dna.length; i++) {
-            if (random(1) > .9) {
-                switch (i) {
-                    case 0:
-                        dna[i] += random(-3, 3);
-                        break;
-                    case 1:
-                    case 3:
-                        dna[i] += random(-.1, .1);
-                        break;
-                    default:
-                        continue;
-                        break;
-                }
-            }
         }
     }
 
+    // draws animal sprite
     display() {
         let frame;
         let heading = this.velocity.heading()
@@ -62,6 +36,20 @@ class Carnivore extends Organism {
         this.frameCounter++;
     }
 
+    // try hunting for neaby herbivores
+    tryHunting(prey) {
+        // should be based on predator + prey health, speed
+        let threshold;
+        try {
+            let diff = this.health - prey.health;
+            threshold = map(diff, -100, 100, 0, 1) * random(.2, .8);
+        } catch (err) {
+            return random(1) < 0.1;
+        }
+        return threshold > 0.32;
+    }
+
+    // try to find nearest prey
     findFood(prey) {
         let distance = Infinity;
         let d;
@@ -108,17 +96,36 @@ class Carnivore extends Organism {
 
     }
 
-    update() {
-        super.update();
+    // finds nearby potential mates
+    findMate(animals) {
+        let closest = super.findMate(animals);
 
-        //should only mate when they're healthy
-        if (this.hunger < 50 && this.health > 50) {
-            this.mode = animalModes.MATE;
-            this.findMate(carnivores);
-        } else {
-            this.mode = animalModes.FOOD;
+        // if there aren't any eligible mates nearby, find food instead
+        if (closest == null) {
             this.findFood(herbivores);
+            return;
         }
+        
+        this.seek(closest);
     }
 
+    // slightly alters dna values for new child
+    mutate(dna) {
+        for (let i = 0; i < dna.length; i++) {
+            if (random(1) > .9) {
+                switch (i) {
+                    case 0:
+                        dna[i] += random(-3, 3);
+                        break;
+                    case 1:
+                    case 3:
+                        dna[i] += random(-.1, .1);
+                        break;
+                    default:
+                        continue;
+                        break;
+                }
+            }
+        }
+    }
 }

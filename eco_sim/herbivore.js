@@ -4,6 +4,20 @@ class Herbivore extends Organism {
         this.mutate(dna);
     }
 
+    // updates state of organism
+    update() {
+        super.update();
+
+        // should only mate when they're healthy
+        if (this.hunger < 50 && this.health > 50) {
+            this.mode = animalModes.MATE;
+            this.findMate(herbivores);
+        } else {
+            this.mode = animalModes.FOOD;
+            this.findFood(nutrients);
+        }
+    }
+
     // finds the nearest plant to eat
     findFood(food) {
         let closest = null;
@@ -101,20 +115,6 @@ class Herbivore extends Organism {
                         break;
                 }
             }
-        }
-    }
-
-    // updates state of organism
-    update() {
-        super.update();
-
-        // should only mate when they're healthy
-        if (this.hunger < 50 && this.health > 50) {
-            this.mode = animalModes.MATE;
-            this.findMate(herbivores);
-        } else {
-            this.mode = animalModes.FOOD;
-            this.findFood(nutrients);
         }
     }
 }
