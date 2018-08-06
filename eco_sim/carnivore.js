@@ -9,7 +9,7 @@ class Carnivore extends Organism {
 
     tryHunting(prey) {
         // should be based on predator + prey health, speed
-        let threshold = ((this.health / showBestAgent(carnivores).health));
+        let threshold = ((this.health / getBestAgent(carnivores).health));
         return random(1) < 0.1;
     }
 

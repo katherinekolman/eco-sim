@@ -104,7 +104,7 @@ class Organism {
     // attempt to produce a new organism
     tryBreeding(animals, mateDNA) {
         // needs to account fitness score, health,  randomness
-        let threshold = ((this.fitness / showBestAgent(animals)) * (this.health / 100) * random(.3, .8));
+        let threshold = ((this.fitness / getBestAgent(animals).fitness) * (this.health / 100) * random(.3, .8));
 
         if (threshold >= .79) {
             if (animals[0].constructor.name == "Herbivore") {

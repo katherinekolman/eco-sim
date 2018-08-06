@@ -24,12 +24,7 @@ function updateTable() {
 
 // locates the agent with the highest fitness score
 function showBestAgent(animalType) {
-    bestAgent = animalType[0];
-    for (let i = 0; i < animalType.length; i++) {
-        if (animalType[i].fitness > bestAgent.fitness) {
-            bestAgent = animalType[i];
-        }
-    }
+    let bestAgent = getBestAgent(animalType);
 
     if (document.getElementById("best_agent").checked) {
         noFill();
@@ -37,8 +32,17 @@ function showBestAgent(animalType) {
         strokeWeight(3);
         ellipse(bestAgent.position.x + 15, bestAgent.position.y + 15, 50, 50);
     }
+}
 
-    return bestAgent.fitness;
+function getBestAgent(animalType) {
+    let bestAgent = animalType[0];
+    for (let i = 0; i < animalType.length; i++) {
+        if (animalType[i].fitness > bestAgent.fitness) {
+            bestAgent = animalType[i];
+        }
+    }
+
+    return bestAgent;
 }
 
 // shows how far the agent can detect things
