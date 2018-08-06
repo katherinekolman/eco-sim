@@ -42,11 +42,11 @@ class Organism {
         this.hunger += 0.05;
 
         if (this.hunger > 100) {
-            this.health -= 1;
+            this.health -= .1;
         } else if (this.hunger > 60) {
-            this.health -= .6;
+            this.health -= .06;
         } else if (this.hunger > 30) {
-            this.health -= .3;
+            this.health -= .03;
         }
     }
 
